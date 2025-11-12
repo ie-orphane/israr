@@ -24,54 +24,19 @@ const mainNavItems: NavItem[] = [
     {
         title: <TransText ar="الرئيسية" fr="Accueil" en="Home" />,
         href: "/",
-        icon: null,
+        icon: LayoutGrid,
     },
     {
-        title: <TransText ar="من نحن" fr="À propos" en="About" />,
-        href: '/a-propos',
-        icon: null,
-        children: [
-            { title: <TransText ar="التاريخ" fr="Histoire" en="History" />, href: '/a-propos/histoire' },
-            { title: <TransText ar="المهمة والقيم" fr="Mission et valeurs" en="Mission and values" />, href: '/a-propos/mission-et-valeurs' },
-            { title: <TransText ar="الفريق" fr="Équipe" en="Team" />, href: '/a-propos/equipe' },
-            { title: <TransText ar="النظام الأساسي" fr="Statuts" en="Statutes" />, href: '/a-propos/statuts' },
-        ],
-    },
-    {
-        title: <TransText ar="برامجنا" fr="Programmes" en="Programmes" />,
+        title: <TransText ar="برامجنا" fr="programmes" en="programmes" />,
         href: '/programmes',
         icon: null,
     },
-    {
-        title: <TransText ar="الأخبار" fr="Actualités" en="News" />,
-        href: '/actualites',
-        icon: null,
-    },
-    {
-        title: <TransText ar="المنشورات والموارد" fr="Publications & Ressources" en="Resources" />,
-        href: '/publications',
-        icon: null,
-    },
-    {
-        title: <TransText ar="المساعدة القانونية" fr="Aide juridique" en="Legal aid" />,
-        href: '/aide',
-        icon: null,
-        children: [
-            { title: <TransText ar="نموذج" fr="Formulaire" en="Form" />, href: '/aide/formulaire' },
-            { title: <TransText ar="القاعدة الوثائقية" fr="Base documentaire" en="Documentary base" />, href: '/aide/base-juridique' },
-            { title: <TransText ar="الخريطة" fr="Carte" en="Map" />, href: '/partenaires/carte' },
-        ],
-    },
-    {
-        title: <TransText ar="اتصل بنا" fr="Contact" en="Contact" />,
-        href: '/contact',
-        icon: null,
-    },
+
 ];
 
 
 
-const activeItemStyles = 'text-white';
+const activeItemStyles = 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
 
 interface AppHeaderProps {
     breadcrumbs?: BreadcrumbItem[];

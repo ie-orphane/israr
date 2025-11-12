@@ -162,4 +162,12 @@
     background-size: auto;
     background-position: top left;
     min-height: 100vh;
-} */
+    } */
+    
+    .zlij{
+        
+        background-image: url('/assets/images/backgorund.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+}
