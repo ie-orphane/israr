@@ -97,7 +97,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     return (
         <>
             <div className="bg-alpha text-[var(--color-light)] dark:bg-beta dark:text-white">
-                <div className={`mx-auto flex h-16 items-center px-4 md:max-w-7xl`}>
+                <div className={`mx-auto flex  items-center px-4 md:max-w-7xl`}>
                     {/* Mobile Menu */}
                     <div className="lg:hidden">
                         <Sheet>
