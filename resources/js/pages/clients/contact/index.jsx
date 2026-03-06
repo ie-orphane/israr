@@ -216,67 +216,23 @@ const Contact = () => {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Contact" />
             <div className="w-full bg-light_gray pb-24">
-                <section className="relative isolate overflow-hidden bg-[var(--color-alpha)] text-white">
-                    <div className="absolute inset-0 zlij opacity-30" />
-                    <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20 lg:py-24">
-                        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-                            <div className="max-w-3xl space-y-6">
-                                <span className="inline-flex items-center rounded-full bg-white/15 px-4 py-1 text-sm font-semibold">
-                                    <TransText
-                                        fr="Coalition ISRAR &mdash; Guichet d’écoute, d’appui et d’empowerment"
-                                        ar="تحالف إصرار &mdash; منصة للإصغاء والدعم والتمكين"
-                                        en="Coalition ISRAR — Listening, support and empowerment desk"
-                                    />
-                                </span>
-                                <h1 className="text-3xl font-bold leading-tight md:text-5xl">
-                                    <TransText
-                                        fr="Restons en contact pour protéger chaque voix"
-                                        ar="لنبقَ على تواصل لحماية كل صوت"
-                                        en="Let’s stay in touch to protect every voice"
-                                    />
-                                </h1>
-                                <p className="text-base text-white/85 md:text-lg">
-                                    <TransText
-                                        fr="Notre équipe accompagne les survivantes de violences basées sur le genre, les associations partenaires et toutes les institutions qui œuvrent pour l’égalité. Ensemble, construisons des réponses impactantes."
-                                        ar="فريقنا يواكب الناجيات من العنف المبني على النوع، الجمعيات الشريكة وكل المؤسسات الساعية للمساواة. معاً نبني استجابات فعالة."
-                                        en="Our team supports survivors of gender-based violence, partner associations, and every institution committed to equality. Together, we can deliver impactful responses."
-                                    />
-                                </p>
-                                <div className="flex flex-wrap gap-4">
-                                    <Button asChild className="bg-white text-[var(--color-alpha)] hover:bg-white/90">
-                                        <Link href="mailto:coalitionisrar@gmail.com">
-                                            <TransText fr="Écrire à l’équipe" ar="راسلوا الفريق" en="Write to the team" />
-                                        </Link>
-                                    </Button>
-                                    <Button
-                                        asChild
-                                        variant="secondary"
-                                        className="border-white/40 bg-white/15 text-white hover:bg-white/20 hover:text-white"
-                                    >
-                                        <Link href="tel:+212537000012">
-                                            <TransText fr="Appeler la ligne d’écoute" ar="الاتصال بخط الاستماع" en="Call the hotline" />
-                                        </Link>
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="grid w-full max-w-xl gap-4 rounded-3xl bg-white/10 p-6 backdrop-blur-md md:grid-cols-2">
-                                {heroHighlights.map(({ icon: Icon, title, description }) => (
-                                    <div key={title.en} className="rounded-2xl bg-white/5 p-4 shadow-sm">
-                                        <div className="mb-3 inline-flex size-10 items-center justify-center rounded-full bg-[var(--color-beta)]/30 text-white">
-                                            <Icon className="h-5 w-5" />
-                                        </div>
-                                        <h3 className="text-base font-semibold">
-                                            <TransText fr={title.fr} ar={title.ar} en={title.en} />
-                                        </h3>
-                                        <p className="mt-2 text-sm text-white/75">
-                                            <TransText fr={description.fr} ar={description.ar} en={description.en} />
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
+                {/* Simple banner header (programmes style) */}
+                <div className="bg-[var(--color-alpha)] text-white">
+                    <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
+                        <div className="text-center space-y-3">
+                            <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
+                                <TransText fr="Contact" ar="اتصال" en="Contact" />
+                            </h1>
+                            <p className="text-sm text-white/90 md:text-base">
+                                <TransText
+                                    fr="Échangeons simplement : un message, un appel ou une visite."
+                                    ar="فلنتواصل ببساطة: رسالة، اتصال أو زيارة."
+                                    en="Reach out easily: a message, a call, or a visit."
+                                />
+                            </p>
                         </div>
                     </div>
-                </section>
+                </div>
 
                 <section className="mx-auto -mt-16 max-w-6xl space-y-8 px-6 md:-mt-20">
                     <div className="grid gap-6 md:grid-cols-3">

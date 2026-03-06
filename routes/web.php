@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+
+Route::get('/a-propos', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

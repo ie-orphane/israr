@@ -30,21 +30,10 @@ const mainNavItems: NavItem[] = [
         title: <TransText ar="من نحن" fr="À propos" en="About" />,
         href: '/a-propos',
         icon: null,
-        children: [
-            { title: <TransText ar="التاريخ" fr="Histoire" en="History" />, href: '/a-propos/histoire' },
-            { title: <TransText ar="المهمة والقيم" fr="Mission et valeurs" en="Mission and values" />, href: '/a-propos/mission-et-valeurs' },
-            { title: <TransText ar="الفريق" fr="Équipe" en="Team" />, href: '/a-propos/equipe' },
-            { title: <TransText ar="النظام الأساسي" fr="Statuts" en="Statutes" />, href: '/a-propos/statuts' },
-        ],
     },
     {
         title: <TransText ar="برامجنا" fr="Programmes" en="Programmes" />,
         href: '/programmes',
-        icon: null,
-    },
-    {
-        title: <TransText ar="الأخبار" fr="Actualités" en="News" />,
-        href: '/actualites',
         icon: null,
     },
     {
@@ -59,7 +48,6 @@ const mainNavItems: NavItem[] = [
         children: [
             { title: <TransText ar="نموذج" fr="Formulaire" en="Form" />, href: '/aide/formulaire' },
             { title: <TransText ar="القاعدة الوثائقية" fr="Base documentaire" en="Documentary base" />, href: '/aide/base-juridique' },
-            { title: <TransText ar="الخريطة" fr="Carte" en="Map" />, href: '/partenaires/carte' },
         ],
     },
     {
