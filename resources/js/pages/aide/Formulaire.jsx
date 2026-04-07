@@ -10,12 +10,26 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ShieldCheck, LoaderCircle } from 'lucide-react';
+import { ShieldCheck, LoaderCircle, Database, FileText, Clock3 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Formulaire() {
     const { flash } = usePage().props;
     const [contactMethod, setContactMethod] = useState('email');
+    const savedRequest = flash?.savedRequest;
+
+    const lang =
+        typeof window !== 'undefined'
+            ? localStorage.getItem('lang') || 'fr'
+            : 'fr';
+
+    const locale = lang === 'ar' ? 'ar-MA' : lang === 'en' ? 'en-US' : 'fr-FR';
+    const formattedSubmittedAt = savedRequest?.submitted_at
+        ? new Date(savedRequest.submitted_at).toLocaleString(locale, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+          })
+        : null;
 
     const regions = [
         { value: 'casablanca', fr: 'Casablanca', ar: 'الدار البيضاء' },
@@ -39,8 +53,33 @@ export default function Formulaire() {
     return (
         <AppLayout>
             <Head title="Formulaire d'aide" />
-            <div className="mx-auto max-w-3xl px-4 py-12">
-                <Card className="border-2">
+            <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-12 xl:max-w-7xl">
+                <section className="relative overflow-hidden rounded-2xl border border-[var(--color-alpha)]/20 bg-gradient-to-br from-[var(--color-alpha)] via-[var(--color-alpha)]/90 to-[var(--color-beta)] px-6 py-8 text-white md:px-8">
+                    <div className="relative z-10 max-w-3xl space-y-3">
+                        <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
+                            <ShieldCheck className="h-3.5 w-3.5" />
+                            <TransText fr="Espace securise" ar="مساحة آمنة" en="Secure space" />
+                        </p>
+                        <h1 className="text-2xl font-bold leading-tight md:text-3xl">
+                            <TransText
+                                fr="Demander une aide juridique en toute confidentialite"
+                                ar="اطلبي المساعدة القانونية بسرية تامة"
+                                en="Request legal support with full confidentiality"
+                            />
+                        </h1>
+                        <p className="max-w-2xl text-sm text-white/90 md:text-base">
+                            <TransText
+                                fr="Ce formulaire nous permet de comprendre votre situation et de vous orienter rapidement vers l'accompagnement adapte."
+                                ar="يساعدنا هذا النموذج على فهم وضعيتك وتوجيهك بسرعة نحو المواكبة المناسبة."
+                                en="This form helps us understand your situation and connect you quickly with the right support."
+                            />
+                        </p>
+                    </div>
+                    <div className="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-white/15 blur-2xl" />
+                    <div className="pointer-events-none absolute -bottom-20 left-8 h-40 w-40 rounded-full bg-black/10 blur-3xl" />
+                </section>
+
+                <Card className="border-2 border-[var(--color-alpha)]/15 shadow-sm">
                     <CardHeader className="space-y-2">
                         <div className="flex items-center gap-2">
                             <ShieldCheck className="h-6 w-6 text-[var(--color-beta)]" />
@@ -62,17 +101,72 @@ export default function Formulaire() {
                     </CardHeader>
                     <CardContent>
                         {flash?.success && (
-                            <Alert className="mb-6 border-green-500 bg-green-50 dark:bg-green-950">
-                                <AlertDescription className="text-green-800 dark:text-green-200">
+                            <Alert className="mb-6 border-green-500/60 bg-green-50">
+                                <AlertDescription className="text-green-800">
                                     {flash.success}
                                 </AlertDescription>
                             </Alert>
                         )}
 
+                        {savedRequest && (
+                            <Card className="mb-6 border border-[var(--color-beta)]/25 bg-[var(--color-beta)]/5">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center gap-2 text-base text-[var(--color-alpha)]">
+                                        <Database className="h-4 w-4" />
+                                        <TransText
+                                            fr="Reponse enregistree dans la base de donnees"
+                                            ar="تم حفظ الطلب في قاعدة البيانات"
+                                            en="Request saved in the database"
+                                        />
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="grid gap-3 sm:grid-cols-2">
+                                    <div className="rounded-lg border bg-white p-3">
+                                        <p className="mb-1 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                                            <FileText className="h-3.5 w-3.5" />
+                                            <TransText fr="Reference" ar="المرجع" en="Reference" />
+                                        </p>
+                                        <p className="text-sm font-semibold text-[var(--color-alpha)]">
+                                            #{savedRequest.id}
+                                        </p>
+                                    </div>
+                                    <div className="rounded-lg border bg-white p-3">
+                                        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                                            <TransText fr="Statut" ar="الحالة" en="Status" />
+                                        </p>
+                                        <p className="text-sm font-semibold text-[var(--color-alpha)]">
+                                            {savedRequest.status === 'pending' ? (
+                                                <TransText fr="En attente" ar="قيد المعالجة" en="Pending" />
+                                            ) : (
+                                                savedRequest.status
+                                            )}
+                                        </p>
+                                    </div>
+                                    <div className="rounded-lg border bg-white p-3">
+                                        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                                            <TransText fr="Region" ar="المنطقة" en="Region" />
+                                        </p>
+                                        <p className="text-sm font-semibold text-[var(--color-alpha)]">
+                                            {savedRequest.region}
+                                        </p>
+                                    </div>
+                                    <div className="rounded-lg border bg-white p-3">
+                                        <p className="mb-1 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                                            <Clock3 className="h-3.5 w-3.5" />
+                                            <TransText fr="Date d'enregistrement" ar="تاريخ التسجيل" en="Saved at" />
+                                        </p>
+                                        <p className="text-sm font-semibold text-[var(--color-alpha)]">
+                                            {formattedSubmittedAt}
+                                        </p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        )}
+
                         <Form
                             method="post"
                             action="/aide/formulaire"
-                            className="space-y-6"
+                            className="space-y-6 xl:grid xl:grid-cols-2 xl:gap-6 xl:space-y-0"
                         >
                             {({ processing, errors }) => (
                                 <>
@@ -128,7 +222,7 @@ export default function Formulaire() {
                                         <InputError message={errors.type_of_violence} />
                                     </div>
 
-                                    <div className="grid gap-2">
+                                    <div className="grid gap-2 xl:col-span-2">
                                         <Label htmlFor="description">
                                             <TransText
                                                 fr="Description de la situation"
@@ -204,24 +298,30 @@ export default function Formulaire() {
                                         </div>
                                     )}
 
-                                    <div className="flex items-start gap-2">
-                                        <Checkbox
-                                            id="consent_given"
-                                            name="consent_given"
-                                            required
-                                            className={errors.consent_given ? 'border-red-500' : ''}
-                                        />
-                                        <Label htmlFor="consent_given" className="text-sm font-normal leading-relaxed">
-                                            <TransText
-                                                fr="J'accepte que mes informations soient utilisées de manière confidentielle pour me contacter et m'accompagner."
-                                                ar="أوافق على استخدام معلوماتي بشكل سري للاتصال بي ومرافقتي."
-                                                en="I accept that my information will be used confidentially to contact and support me."
+                                    <div className="xl:col-span-2">
+                                        <div className="flex items-start gap-2">
+                                            <Checkbox
+                                                id="consent_given"
+                                                name="consent_given"
+                                                required
+                                                className={errors.consent_given ? 'border-red-500' : ''}
                                             />
-                                        </Label>
+                                            <Label htmlFor="consent_given" className="text-sm font-normal leading-relaxed">
+                                                <TransText
+                                                    fr="J'accepte que mes informations soient utilisées de manière confidentielle pour me contacter et m'accompagner."
+                                                    ar="أوافق على استخدام معلوماتي بشكل سري للاتصال بي ومرافقتي."
+                                                    en="I accept that my information will be used confidentially to contact and support me."
+                                                />
+                                            </Label>
+                                        </div>
+                                        <InputError message={errors.consent_given} />
                                     </div>
-                                    <InputError message={errors.consent_given} />
 
-                                    <Button type="submit" className="w-full" disabled={processing}>
+                                    <Button
+                                        type="submit"
+                                        className="w-full rounded-lg bg-[var(--color-alpha)] py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[var(--color-alpha)]/90 xl:col-span-2"
+                                        disabled={processing}
+                                    >
                                         {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
                                         <TransText
                                             fr="Envoyer la demande"

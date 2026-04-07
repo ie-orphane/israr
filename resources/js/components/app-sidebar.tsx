@@ -1,17 +1,21 @@
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { FileText, LayoutGrid } from 'lucide-react';
 import AppLogo from '../../../public/assets/images/logo_purple.png';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: "/",
+        href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: "Reponses d'aide",
+        href: '/dashboard/aide-requests',
+        icon: FileText,
     },
 ];
 
