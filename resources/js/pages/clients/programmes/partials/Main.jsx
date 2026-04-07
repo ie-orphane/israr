@@ -1,73 +1,87 @@
 import React from 'react';
+import TransText from '@components/TransText';
 import { Users, MapPin, Handshake, Download } from 'lucide-react';
 
 const Main = ({ onLoading, onFilteredProgrammes }) => {
+    const getStatusLabel = (status) => {
+        if (status === 'active') {
+            return { fr: 'En cours', ar: 'جاري', en: 'Active' };
+        }
+
+        return { fr: 'Clôturé', ar: 'مختتم', en: 'Closed' };
+    };
+
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <section className="mx-auto max-w-6xl px-6 py-12">
             {onLoading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="bg-light rounded-lg shadow-md overflow-hidden animate-pulse">
-                            <div className="h-48 sm:h-56 bg-skeleton1"></div>
-                            <div className="p-5 sm:p-6 space-y-3">
-                                <div className="h-6 bg-skeleton1 rounded w-3/4"></div>
+                        <div key={i} className="animate-pulse rounded-2xl bg-white p-5 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-700">
+                            <div className="h-40 rounded-xl bg-neutral-200 dark:bg-neutral-700" />
+                            <div className="mt-4 space-y-3">
+                                <div className="h-5 w-3/4 rounded bg-neutral-200 dark:bg-neutral-700" />
                                 <div className="space-y-2">
-                                    <div className="h-4 bg-skeleton2 rounded"></div>
-                                    <div className="h-4 bg-skeleton2 rounded w-5/6"></div>
+                                    <div className="h-4 rounded bg-neutral-200 dark:bg-neutral-700" />
+                                    <div className="h-4 w-5/6 rounded bg-neutral-200 dark:bg-neutral-700" />
                                 </div>
-                                <div className="h-10 bg-skeleton1 rounded w-1/3"></div>
+                                <div className="h-9 w-1/3 rounded bg-neutral-200 dark:bg-neutral-700" />
                             </div>
                         </div>
                     ))}
                 </div>
             ) : onFilteredProgrammes.length > 0 ? (
                 <>
-                    <div className="text-center mb-8">
-                        <p className="text-skeleton2 text-sm sm:text-base">
-                            {onFilteredProgrammes.length} programme{onFilteredProgrammes.length > 1 ? 's' : ''} trouv\u00e9{onFilteredProgrammes.length > 1 ? 's' : ''}
+                    <div className="mb-6 text-center">
+                        <p className="text-sm text-neutral-500">
+                            <TransText
+                                fr={`${onFilteredProgrammes.length} programme${onFilteredProgrammes.length > 1 ? 's' : ''} trouvé${onFilteredProgrammes.length > 1 ? 's' : ''}`}
+                                ar={`تم العثور على ${onFilteredProgrammes.length} برنامج`}
+                                en={`${onFilteredProgrammes.length} program${onFilteredProgrammes.length > 1 ? 's' : ''} found`}
+                            />
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {onFilteredProgrammes.map((p) => (
                             <div
                                 key={p.id}
-                                className="bg-light rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-light_gray group hover:-translate-y-2"
+                                className="group flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-neutral-200 transition hover:-translate-y-0.5 hover:shadow-md dark:bg-neutral-900 dark:ring-neutral-700"
                             >
-                                <div className="relative overflow-hidden h-48 sm:h-56">
+                                <div className="relative mb-4 h-44 overflow-hidden rounded-xl">
                                     <img
                                         src={p.image}
                                         alt={p.title_fr}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         onError={(e) => {
                                             e.target.src = "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop";
                                         }}
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+                                    <div className="absolute left-3 top-3">
                                         <span
-                                            className={`inline-block text-xs sm:text-sm font-bold px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg shadow-lg ${
-                                                p.status === "En cours"
-                                                    ? "bg-beta text-light"
-                                                    : "bg-alpha text-light"
+                                            className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${
+                                                p.status === 'active'
+                                                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
+                                                    : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
                                             }`}
                                         >
-                                            {p.status}
+                                            <TransText
+                                                fr={getStatusLabel(p.status).fr}
+                                                ar={getStatusLabel(p.status).ar}
+                                                en={getStatusLabel(p.status).en}
+                                            />
                                         </span>
                                     </div>
                                 </div>
 
-                                <div className="p-5 sm:p-6">
-                                    <h2 className="text-lg sm:text-xl font-bold mb-3 text-alpha group-hover:text-beta transition-colors duration-300 line-clamp-2">
-                                        {p.title_fr}
+                                <div className="flex flex-1 flex-col">
+                                    <h2 className="mb-2 line-clamp-2 text-base font-semibold text-[var(--color-alpha)]">
+                                        <TransText fr={p.title_fr} ar={p.title_ar ?? p.title_fr} en={p.title_fr} />
                                     </h2>
-                                    <p className="text-skeleton2 text-sm sm:text-base leading-relaxed mb-4 line-clamp-3">
-                                        {p.summary_fr}
+                                    <p className="mb-4 line-clamp-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                        <TransText fr={p.summary_fr} ar={p.summary_ar ?? p.summary_fr} en={p.summary_fr} />
                                     </p>
 
-                                    {/* Impact indicators */}
-                                    <div className="flex flex-wrap gap-2 mb-4">
+                                    <div className="mb-4 flex flex-wrap gap-2">
                                         {p.beneficiaires && (
                                             <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-beta)]/10 px-2.5 py-1 text-xs font-medium text-[var(--color-alpha)]">
                                                 <Users className="h-3 w-3" />
@@ -77,13 +91,14 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
                                         {p.region && (
                                             <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-beta)]/10 px-2.5 py-1 text-xs font-medium text-[var(--color-alpha)]">
                                                 <MapPin className="h-3 w-3" />
-                                                {p.region}
+                                                <TransText fr={p.region} ar={p.region_ar ?? p.region} en={p.region} />
                                             </span>
                                         )}
                                         {p.partenaires && p.partenaires.length > 0 && (
                                             <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-beta)]/10 px-2.5 py-1 text-xs font-medium text-[var(--color-alpha)]">
                                                 <Handshake className="h-3 w-3" />
-                                                {p.partenaires.join(', ')}
+                                                {p.partenaires.length}
+                                                <TransText fr=" partenaire(s)" ar=" شريك(شركاء)" en=" partner(s)" />
                                             </span>
                                         )}
                                         {p.budget && (
@@ -93,16 +108,13 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
                                         )}
                                     </div>
 
-                                    <div className="flex gap-2">
-                                        <button className="flex-1 bg-alpha text-light px-4 py-3 rounded-lg text-sm font-semibold hover:bg-beta transition-all duration-300 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2">
-                                            <span>En savoir plus</span>
-                                            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                                            </svg>
+                                    <div className="mt-auto flex gap-2">
+                                        <button className="flex-1 rounded-lg bg-[var(--color-alpha)] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[var(--color-alpha)]/90">
+                                            <TransText fr="En savoir plus" ar="معرفة المزيد" en="Learn more" />
                                         </button>
                                         <button
-                                            className="flex items-center justify-center gap-1.5 rounded-lg border-2 border-alpha px-3 py-3 text-sm font-semibold text-alpha hover:bg-alpha hover:text-light transition-all duration-300 active:scale-95"
-                                            title="T\u00e9l\u00e9charger la fiche projet"
+                                            className="flex items-center justify-center gap-1.5 rounded-lg border border-[var(--color-alpha)]/20 px-3 py-2.5 text-sm font-medium text-[var(--color-alpha)] transition hover:bg-[var(--color-alpha)] hover:text-white"
+                                            title="Télécharger la fiche projet"
                                         >
                                             <Download className="h-4 w-4" />
                                             <span className="hidden sm:inline">PDF</span>
@@ -114,21 +126,25 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
                     </div>
                 </>
             ) : (
-                <div className="text-center py-16 sm:py-20">
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-light_gray rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg className="w-10 h-10 sm:w-12 sm:h-12 text-skeleton2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="py-16 text-center">
+                    <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800">
+                        <svg className="h-10 w-10 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-alpha mb-3">
-                        Aucun programme trouv\u00e9
+                    <h3 className="mb-3 text-xl font-bold text-[var(--color-alpha)] sm:text-2xl">
+                        <TransText fr="Aucun programme trouvé" ar="لم يتم العثور على برامج" en="No program found" />
                     </h3>
-                    <p className="text-skeleton2 text-sm sm:text-base mb-6 max-w-md mx-auto">
-                        Il n'y a pas de programmes disponibles pour ce filtre.
+                    <p className="mx-auto mb-6 max-w-md text-sm text-neutral-500 sm:text-base">
+                        <TransText
+                            fr="Il n'y a pas de programmes disponibles pour ce filtre."
+                            ar="لا توجد برامج متاحة لهذا الفلتر."
+                            en="No programs are available for this filter."
+                        />
                     </p>
                 </div>
             )}
-        </div>
+        </section>
     );
 };
 
