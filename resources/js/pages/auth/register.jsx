@@ -2,6 +2,7 @@ import RegisteredUserController from '@/actions/App/Http/Controllers/Auth/Regist
 import { login } from '@/routes';
 import { Form, Head } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
+import TransText from '@components/TransText';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -12,7 +13,16 @@ import AuthLayout from '@/layouts/auth-layout';
 
 export default function Register() {
     return (
-        <AuthLayout title="Create an account" description="Enter your details below to create your account">
+        <AuthLayout
+            title={<TransText fr="Créer un compte" ar="إنشاء حساب" en="Create an account" />}
+            description={
+                <TransText
+                    fr="Renseignez vos informations pour ouvrir votre espace sécurisé."
+                    ar="املؤوا معلوماتكم لإنشاء فضائكم الآمن."
+                    en="Fill in your details to create your secure space."
+                />
+            }
+        >
             <Head title="Register" />
             <Form
                 {...RegisteredUserController.store.form()}
@@ -24,7 +34,9 @@ export default function Register() {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">
+                                    <TransText fr="Nom complet" ar="الاسم الكامل" en="Name" />
+                                </Label>
                                 <Input
                                     id="name"
                                     type="text"
@@ -39,7 +51,9 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">
+                                    <TransText fr="Adresse email" ar="البريد الإلكتروني" en="Email address" />
+                                </Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -53,7 +67,9 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">
+                                    <TransText fr="Mot de passe" ar="كلمة المرور" en="Password" />
+                                </Label>
                                 <Input
                                     id="password"
                                     type="password"
@@ -67,7 +83,9 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password_confirmation">Confirm password</Label>
+                                <Label htmlFor="password_confirmation">
+                                    <TransText fr="Confirmer le mot de passe" ar="تأكيد كلمة المرور" en="Confirm password" />
+                                </Label>
                                 <Input
                                     id="password_confirmation"
                                     type="password"
@@ -80,16 +98,16 @@ export default function Register() {
                                 <InputError message={errors.password_confirmation} />
                             </div>
 
-                            <Button type="submit" className="mt-2 w-full" tabIndex={5} data-test="register-user-button">
+                            <Button type="submit" className="mt-2 w-full bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90" tabIndex={5} data-test="register-user-button">
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                                Create account
+                                <TransText fr="Créer un compte" ar="إنشاء الحساب" en="Create account" />
                             </Button>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
+                            <TransText fr="Vous avez déjà un compte ?" ar="لديكم حساب بالفعل؟" en="Already have an account?" />{' '}
                             <TextLink href={login()} tabIndex={6}>
-                                Log in
+                                <TransText fr="Se connecter" ar="تسجيل الدخول" en="Log in" />
                             </TextLink>
                         </div>
                     </>
