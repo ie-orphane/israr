@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
 import TransText from '@components/TransText';
 import { FileText, Download, Filter } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const categories = [
     { key: 'all', label: { fr: 'Toutes', ar: 'الكل', en: 'All' } },
@@ -119,6 +119,32 @@ const categoryLabels = {
 
 export default function Publications() {
     const [activeCategory, setActiveCategory] = useState('all');
+    const [lang, setLang] = useState('fr');
+
+    useEffect(() => {
+        const readLang = () => {
+            if (typeof window === 'undefined') return 'fr';
+            const saved = window.localStorage.getItem('lang');
+            return saved === 'ar' || saved === 'en' ? saved : 'fr';
+        };
+
+        const onLangChange = () => setLang(readLang());
+
+        setLang(readLang());
+        window.addEventListener('language:change', onLangChange);
+        window.addEventListener('storage', onLangChange);
+
+        return () => {
+            window.removeEventListener('language:change', onLangChange);
+            window.removeEventListener('storage', onLangChange);
+        };
+    }, []);
+
+    const localeByLang = {
+        fr: 'fr-FR',
+        ar: 'ar-MA',
+        en: 'en-US',
+    };
 
     const filtered = activeCategory === 'all'
         ? publications
@@ -167,7 +193,11 @@ export default function Publications() {
                 {/* Publications Grid */}
                 <section className="mx-auto max-w-6xl px-6 py-12">
                     <p className="mb-6 text-center text-sm text-neutral-500">
-                        {filtered.length} publication{filtered.length > 1 ? 's' : ''}
+                        <TransText
+                            fr={`${filtered.length} publication${filtered.length > 1 ? 's' : ''}`}
+                            ar={`${filtered.length} ${filtered.length > 1 ? 'منشورات' : 'منشور'}`}
+                            en={`${filtered.length} publication${filtered.length > 1 ? 's' : ''}`}
+                        />
                     </p>
                     {filtered.length > 0 ? (
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -184,7 +214,13 @@ export default function Publications() {
                                                 en={categoryLabels[pub.category].en}
                                             />
                                         </span>
-                                        <time className="text-xs text-neutral-500">{new Date(pub.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                                        <time className="text-xs text-neutral-500">
+                                            {new Date(pub.date).toLocaleDateString(localeByLang[lang], {
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: 'numeric',
+                                            })}
+                                        </time>
                                     </div>
                                     <h3 className="mb-2 text-base font-semibold text-[var(--color-alpha)] line-clamp-2">
                                         <TransText fr={pub.title.fr} ar={pub.title.ar} en={pub.title.en} />

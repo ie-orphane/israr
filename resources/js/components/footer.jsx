@@ -2,7 +2,15 @@ import logo from '../../../public/assets/images/logo_white.png';
 import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import TransText from "@components/TransText";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+
+function XIcon(props) {
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+            <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.131-6.708L5.2 22H1.94l7.607-8.695L1.5 2h6.713l4.638 6.13L18.244 2Zm-1.144 18h1.802L7.228 3.894H5.3L17.1 20Z" />
+        </svg>
+    );
+}
 
 export default function Footer() {
     const readLang = () => {
@@ -101,8 +109,8 @@ export default function Footer() {
                                 <a href="#" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100" aria-label="Facebook">
                                     <Facebook className="h-5 w-5" />
                                 </a>
-                                <a href="#" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100" aria-label="Twitter">
-                                    <Twitter className="h-5 w-5" />
+                                <a href="https://x.com/coalitionisrar" target="_blank" rel="noreferrer" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100" aria-label="X">
+                                    <XIcon className="h-5 w-5" />
                                 </a>
                                 <a href="#" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100" aria-label="Instagram">
                                     <Instagram className="h-5 w-5" />

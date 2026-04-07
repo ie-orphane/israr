@@ -2,8 +2,16 @@ import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
 import TransText from '@components/TransText';
 import { Button } from '@/components/ui/button';
-import { Mail, MapPin, Phone, Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
 import { useState } from 'react';
+
+function XIcon(props) {
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+            <path d="M18.244 2H21.5l-7.114 8.13L22.75 22h-6.547l-5.131-6.708L5.2 22H1.94l7.607-8.695L1.5 2h6.713l4.638 6.13L18.244 2Zm-1.144 18h1.802L7.228 3.894H5.3L17.1 20Z" />
+        </svg>
+    );
+}
 
 const emailContacts = [
     {
@@ -48,7 +56,7 @@ const socialLinks = [
     { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/coalitionisrar', color: 'hover:bg-blue-600' },
     { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/coalitionisrar', color: 'hover:bg-pink-600' },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/coalitionisrar', color: 'hover:bg-blue-700' },
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/coalitionisrar', color: 'hover:bg-sky-500' },
+    { name: 'X', icon: XIcon, href: 'https://x.com/coalitionisrar', color: 'hover:bg-neutral-900' },
 ];
 
 export default function Contact() {
