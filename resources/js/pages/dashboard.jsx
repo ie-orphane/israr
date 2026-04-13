@@ -67,6 +67,20 @@ export default function Dashboard() {
 
                     <Card>
                         <CardHeader>
+                            <CardTitle>Gestion des programmes</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Ajoutez, modifiez et publiez les programmes affiches sur la page publique /programmes.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/programmes">Ouvrir la gestion des programmes</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
                             <CardTitle>Messages de contact</CardTitle>
                         </CardHeader>
                         <CardContent>

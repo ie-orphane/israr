@@ -1,5 +1,6 @@
 import React from 'react';
 import TransText from '@components/TransText';
+import { Link } from '@inertiajs/react';
 import { Users, MapPin, Handshake, Download } from 'lucide-react';
 
 const Main = ({ onLoading, onFilteredProgrammes }) => {
@@ -75,10 +76,10 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
 
                                 <div className="flex flex-1 flex-col">
                                     <h2 className="mb-2 line-clamp-2 text-base font-semibold text-[var(--color-alpha)]">
-                                        <TransText fr={p.title_fr} ar={p.title_ar ?? p.title_fr} en={p.title_fr} />
+                                        <TransText fr={p.title_fr} ar={p.title_ar ?? p.title_fr} en={p.title_en ?? p.title_fr} />
                                     </h2>
                                     <p className="mb-4 line-clamp-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                        <TransText fr={p.summary_fr} ar={p.summary_ar ?? p.summary_fr} en={p.summary_fr} />
+                                        <TransText fr={p.summary_fr} ar={p.summary_ar ?? p.summary_fr} en={p.summary_en ?? p.summary_fr} />
                                     </p>
 
                                     <div className="mb-4 flex flex-wrap gap-2">
@@ -91,7 +92,7 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
                                         {p.region && (
                                             <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-beta)]/10 px-2.5 py-1 text-xs font-medium text-[var(--color-alpha)]">
                                                 <MapPin className="h-3 w-3" />
-                                                <TransText fr={p.region} ar={p.region_ar ?? p.region} en={p.region} />
+                                                <TransText fr={p.region} ar={p.region_ar ?? p.region} en={p.region_en ?? p.region} />
                                             </span>
                                         )}
                                         {p.partenaires && p.partenaires.length > 0 && (
@@ -109,16 +110,23 @@ const Main = ({ onLoading, onFilteredProgrammes }) => {
                                     </div>
 
                                     <div className="mt-auto flex gap-2">
-                                        <button className="flex-1 rounded-lg bg-[var(--color-alpha)] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[var(--color-alpha)]/90">
+                                        <Link href={`/programmes/${p.id}`} className="flex-1 rounded-lg bg-[var(--color-alpha)] px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-[var(--color-alpha)]/90">
                                             <TransText fr="En savoir plus" ar="معرفة المزيد" en="Learn more" />
-                                        </button>
-                                        <button
-                                            className="flex items-center justify-center gap-1.5 rounded-lg border border-[var(--color-alpha)]/20 px-3 py-2.5 text-sm font-medium text-[var(--color-alpha)] transition hover:bg-[var(--color-alpha)] hover:text-white"
-                                            title="Télécharger la fiche projet"
-                                        >
-                                            <Download className="h-4 w-4" />
-                                            <span className="hidden sm:inline">PDF</span>
-                                        </button>
+                                        </Link>
+                                        {
+                                            p.project_file_url && (
+                                                 <a
+                                                    href={p.project_file_url}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[var(--color-alpha)]/20 px-3 py-2.5 text-sm font-medium text-[var(--color-alpha)] hover:bg-[var(--color-alpha)] hover:text-white transition"
+                                                    title="Télécharger la fiche projet"
+                                                >
+                                                    <Download className="h-4 w-4" />
+                                                    <span className="hidden sm:inline">PDF</span>
+                                                </a>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>

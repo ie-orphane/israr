@@ -3,7 +3,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, FileText, Handshake, Inbox, LayoutGrid, FileArchive } from 'lucide-react';
+import { BookOpen, FileText, Handshake, Inbox, LayoutGrid, FileArchive, FolderKanban } from 'lucide-react';
 import AppLogo from '../../../public/assets/images/logo_purple.png';
 
 const mainNavItems: NavItem[] = [
@@ -26,6 +26,11 @@ const mainNavItems: NavItem[] = [
         title: 'Publications',
         href: '/admin/publications',
         icon: BookOpen,
+    },
+    {
+        title: 'Programmes',
+        href: '/admin/programmes',
+        icon: FolderKanban,
     },
     {
         title: 'Messages',

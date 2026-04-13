@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutDocumentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\ProgrammeController;
 use App\Models\AideRequest;
 use App\Models\Contact;
 use App\Models\Partner;
@@ -102,6 +103,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('publications', [PublicationController::class, 'store'])->name('dashboard.publications.store');
     Route::put('publications/{publication}', [PublicationController::class, 'update'])->name('dashboard.publications.update');
     Route::delete('publications/{publication}', [PublicationController::class, 'destroy'])->name('dashboard.publications.destroy');
+
+    Route::get('programmes', [ProgrammeController::class, 'dashboardIndex'])->name('dashboard.programmes.index');
+    Route::post('programmes', [ProgrammeController::class, 'store'])->name('dashboard.programmes.store');
+    Route::put('programmes/{programme}', [ProgrammeController::class, 'update'])->name('dashboard.programmes.update');
+    Route::delete('programmes/{programme}', [ProgrammeController::class, 'destroy'])->name('dashboard.programmes.destroy');
 
     Route::get('aide-requests', function () {
         $aideRequests = AideRequest::query()
