@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AboutDocumentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PublicationController;
@@ -53,6 +54,28 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
             'messages' => $messages,
         ]);
     })->name('dashboard.messages.index');
+
+    Route::get('about-documents', function () {
+        $documents = \App\Models\AboutDocument::query()
+            ->orderByDesc('id')
+            ->get(['id', 'title_fr', 'title_ar', 'title_en', 'file_path', 'is_published'])
+            ->map(fn (\App\Models\AboutDocument $document) => [
+                'id' => $document->id,
+                'title_fr' => $document->title_fr,
+                'title_ar' => $document->title_ar,
+                'title_en' => $document->title_en,
+                'file_url' => $document->file_path ? asset('storage/' . $document->file_path) : null,
+                'is_published' => $document->is_published,
+            ]);
+
+        return Inertia::render('dashboard/about-documents', [
+            'documents' => $documents,
+        ]);
+    })->name('dashboard.about-documents.index');
+
+    Route::post('about-documents', [AboutDocumentController::class, 'store'])->name('dashboard.about-documents.store');
+    Route::put('about-documents/{aboutDocument}', [AboutDocumentController::class, 'update'])->name('dashboard.about-documents.update');
+    Route::delete('about-documents/{aboutDocument}', [AboutDocumentController::class, 'destroy'])->name('dashboard.about-documents.destroy');
 
     Route::get('partners', function () {
         $partners = Partner::query()

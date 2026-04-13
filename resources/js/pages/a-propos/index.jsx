@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import TransText from '@components/TransText';
 import {
     Calendar, Award, Users, Building2, FileText, Download,
@@ -155,15 +155,7 @@ const governance = [
     },
 ];
 
-const documents = [
-    { title: { fr: 'Statuts de la Coalition ISRAR', ar: 'النظام الأساسي لتحالف إصرار', en: 'ISRAR Coalition Statutes' }, type: 'PDF' },
-    { title: { fr: 'Rapport annuel 2024', ar: 'التقرير السنوي 2024', en: 'Annual Report 2024' }, type: 'PDF' },
-    { title: { fr: 'Rapport annuel 2023', ar: 'التقرير السنوي 2023', en: 'Annual Report 2023' }, type: 'PDF' },
-    { title: { fr: 'Charte de la Coalition', ar: 'ميثاق التحالف', en: 'Coalition Charter' }, type: 'PDF' },
-    { title: { fr: 'Plan stratégique 2023-2027', ar: 'المخطط الاستراتيجي 2023-2027', en: 'Strategic Plan 2023-2027' }, type: 'PDF' },
-];
-
-export default function APropos() {
+export default function APropos({ documents = [] }) {
     return (
         <AppLayout>
             <Head title="À propos" />
@@ -257,35 +249,35 @@ export default function APropos() {
                     </div>
                 </section>
 
-                {/* Documents */}
-                <section className="border-t border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-700 dark:bg-neutral-900/40">
-                    <div className="mx-auto max-w-4xl px-6">
-                        <h2 className="mb-10 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
-                            <TransText fr="Documents téléchargeables" ar="وثائق قابلة للتحميل" en="Downloadable documents" />
-                        </h2>
-                        <div className="space-y-3">
-                            {documents.map((doc, idx) => (
-                                <div key={idx} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700">
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">
-                                            <FileText className="h-5 w-5" />
+                {documents.length > 0 && (
+                    <section className="border-t border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-700 dark:bg-neutral-900/40">
+                        <div className="mx-auto max-w-4xl px-6">
+                            <h2 className="mb-10 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
+                                <TransText fr="Documents téléchargeables" ar="وثائق قابلة للتحميل" en="Downloadable documents" />
+                            </h2>
+                            <div className="space-y-3">
+                                {documents.map((doc) => (
+                                    <a key={doc.id} href={doc.file_url} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm ring-1 ring-neutral-200 transition hover:-translate-y-0.5 hover:shadow-md dark:bg-neutral-800 dark:ring-neutral-700">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">
+                                                <FileText className="h-5 w-5" />
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-medium text-[var(--color-alpha)]">
+                                                    <TransText fr={doc.title_fr} ar={doc.title_ar} en={doc.title_en} />
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-sm font-medium text-[var(--color-alpha)]">
-                                                <TransText fr={doc.title.fr} ar={doc.title.ar} en={doc.title.en} />
-                                            </p>
-                                            <p className="text-xs text-neutral-500">{doc.type}</p>
-                                        </div>
-                                    </div>
-                                    <button className="flex items-center gap-1.5 rounded-lg border border-[var(--color-alpha)]/20 px-3 py-2 text-xs font-medium text-[var(--color-alpha)] transition hover:bg-[var(--color-alpha)]/5">
-                                        <Download className="h-3.5 w-3.5" />
-                                        <TransText fr="Télécharger" ar="تحميل" en="Download" />
-                                    </button>
-                                </div>
-                            ))}
+                                        <span className="flex items-center gap-1.5 rounded-lg border border-[var(--color-alpha)]/20 px-3 py-2 text-xs font-medium text-[var(--color-alpha)] transition hover:bg-[var(--color-alpha)]/5">
+                                            <Download className="h-3.5 w-3.5" />
+                                            <TransText fr="Télécharger" ar="تحميل" en="Download" />
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                )}
             </div>
         </AppLayout>
     );

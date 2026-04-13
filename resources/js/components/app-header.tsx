@@ -268,6 +268,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         </NavigationMenu>
                     </div>
 
+                    <div className={`${isArabic ? 'mr-auto' : 'ml-auto'} flex items-center gap-3`}>
+                        <LanguageSwitch />
+                    </div>
+
                     {/* Help Button */}
                     <div className={`${isArabic ? 'mr-2' : 'ml-2'} hidden lg:block`}>
                         <Button asChild className="bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
@@ -275,10 +279,6 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                 <TransText ar="أحتاج إلى المساعدة" fr="Je cherche de l'aide" en="I need help" />
                             </Link>
                         </Button>
-                    </div>
-
-                    <div className={`${isArabic ? 'mr-auto' : 'ml-auto'} flex items-center gap-3`}>
-                        <LanguageSwitch />
                     </div>
                 </div>
             </div>

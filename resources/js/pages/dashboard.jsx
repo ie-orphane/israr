@@ -78,6 +78,20 @@ export default function Dashboard() {
                             </Button>
                         </CardContent>
                     </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Documents telechargeables</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Gere les documents affiches dans la section Documents telechargeables de la page A propos.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/about-documents">Ouvrir la gestion des documents</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         </AppLayout>
