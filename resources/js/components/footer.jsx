@@ -80,9 +80,6 @@ export default function Footer() {
                             <Link href="/programmes" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100">
                                 <TransText ar="برامجنا" fr="Programmes" en="Programmes" />
                             </Link>
-                            <Link href="/partenaires" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100">
-                                <TransText ar="الشركاء" fr="Partenaires" en="Partners" />
-                            </Link>
                         </nav>
                     </div>
 
@@ -100,33 +97,6 @@ export default function Footer() {
                                 className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100"
                             >
                                 <TransText ar="القاعدة الوثائقية" fr="Base documentaire" en="Documentary base" />
-                            </Link>
-                            <Link
-                                href="/aide/base-juridique?type=guides"
-                                className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100"
-                            >
-                                <TransText ar="الدلائل" fr="Guides" en="Guides" />
-                            </Link>
-                        </nav>
-                    </div>
-
-                    {/* Campagnes Section */}
-                    <div className="space-y-4">
-                        <h3 className="text-sm font-bold">
-                            <TransText ar="الحملات" fr="Campagnes" en="Campaigns" />
-                        </h3>
-                        <nav className="flex flex-col space-y-2 text-sm">
-                            <Link
-                                href="/campagnes/houqouq-wa-mousawat"
-                                className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100"
-                            >
-                                <TransText ar="حقوق ومساواة" fr="Houqouq wa Mousawat" en="Houqouq wa Mousawat" />
-                            </Link>
-                            <Link
-                                href="/campagnes/violences-numeriques"
-                                className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100"
-                            >
-                                <TransText ar="العنف الرقمي" fr="Violences numériques" en="Digital violence" />
                             </Link>
                         </nav>
                     </div>
