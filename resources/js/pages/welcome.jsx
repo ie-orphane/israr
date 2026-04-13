@@ -44,15 +44,6 @@ function AnimatedCounter({ target, prefix = '' }) {
 export default function Welcome({ partners = [] }) {
     const carouselSlides = [
         {
-            src: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&fit=crop&w=1600&q=80',
-            alt: 'Women collaborating in a meeting',
-            caption: {
-                fr: 'Accompagner les femmes et leurs proches avec une écoute dédiée.',
-                ar: 'مواكبة النساء والمحيطين بهن من خلال فضاء للإصغاء.',
-                en: 'Providing attentive support for women and their families.',
-            },
-        },
-        {
             src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
             alt: 'Community meeting discussing rights',
             caption: {

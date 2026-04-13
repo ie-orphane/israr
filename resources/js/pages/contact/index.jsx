@@ -56,7 +56,7 @@ const socialLinks = [
     { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/coalitionisrar', color: 'hover:bg-blue-600' },
     { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/coalitionisrar', color: 'hover:bg-pink-600' },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/coalitionisrar', color: 'hover:bg-blue-700' },
-    { name: 'X', icon: XIcon, href: 'https://x.com/coalitionisrar', color: 'hover:bg-neutral-900' },
+    { name: 'X - Twitter', icon: XIcon, href: 'https://x.com/coalitionisrar', color: 'hover:bg-neutral-900' },
 ];
 
 export default function Contact() {

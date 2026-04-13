@@ -6,7 +6,7 @@ const Filters = ({ activeFilter, onFilterChange, onFilters }) => {
         <section className="sticky top-0 z-20 border-b border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
             <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2 px-6 py-4">
                 <span className="mr-2 hidden text-sm text-neutral-500 sm:inline">
-                    <TransText fr="Filtrer par" ar="تصفية حسب" en="Filter by" />
+                    <TransText fr="Filtrer par" ar="تصفية حسب" />
                 </span>
                 {onFilters.map((f) => (
                     <button
@@ -18,7 +18,7 @@ const Filters = ({ activeFilter, onFilterChange, onFilters }) => {
                                 : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'
                         }`}
                     >
-                        <TransText fr={f.label.fr} ar={f.label.ar} en={f.label.en} />
+                        <TransText fr={f.label.fr} ar={f.label.ar} />
                     </button>
                 ))}
             </div>

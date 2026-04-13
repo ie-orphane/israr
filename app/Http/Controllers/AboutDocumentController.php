@@ -14,12 +14,11 @@ class AboutDocumentController extends Controller
     {
         $documents = AboutDocument::query()
             ->orderByDesc('id')
-            ->get(['id', 'title_fr', 'title_ar', 'title_en', 'file_path', 'is_published'])
+            ->get(['id', 'title_fr', 'title_ar', 'file_path', 'is_published'])
             ->map(fn (AboutDocument $document) => [
                 'id' => $document->id,
                 'title_fr' => $document->title_fr,
                 'title_ar' => $document->title_ar,
-                'title_en' => $document->title_en,
                 'file_url' => asset('storage/' . $document->file_path),
                 'is_published' => $document->is_published,
             ]);
@@ -34,7 +33,6 @@ class AboutDocumentController extends Controller
         $validated = $request->validate([
             'title_fr' => ['required', 'string', 'max:255'],
             'title_ar' => ['required', 'string', 'max:255'],
-            'title_en' => ['required', 'string', 'max:255'],
             'document' => ['required', 'file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx', 'max:10240'],
             'is_published' => ['nullable', 'boolean'],
         ]);
@@ -44,7 +42,6 @@ class AboutDocumentController extends Controller
         AboutDocument::query()->create([
             'title_fr' => $validated['title_fr'],
             'title_ar' => $validated['title_ar'],
-            'title_en' => $validated['title_en'],
             'file_path' => $filePath,
             'is_published' => (bool) ($validated['is_published'] ?? false),
         ]);
@@ -57,7 +54,6 @@ class AboutDocumentController extends Controller
         $validated = $request->validate([
             'title_fr' => ['required', 'string', 'max:255'],
             'title_ar' => ['required', 'string', 'max:255'],
-            'title_en' => ['required', 'string', 'max:255'],
             'document' => ['nullable', 'file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx', 'max:10240'],
             'is_published' => ['nullable', 'boolean'],
         ]);
@@ -72,7 +68,6 @@ class AboutDocumentController extends Controller
 
         $aboutDocument->title_fr = $validated['title_fr'];
         $aboutDocument->title_ar = $validated['title_ar'];
-        $aboutDocument->title_en = $validated['title_en'];
         $aboutDocument->is_published = (bool) ($validated['is_published'] ?? false);
         $aboutDocument->save();
 

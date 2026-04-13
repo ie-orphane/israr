@@ -10,9 +10,9 @@ const Programmes = ({ programmes = [] }) => {
     const [filter, setFilter] = useState('all');
 
     const filters = [
-        { key: 'all', label: { fr: 'Tous', ar: 'الكل', en: 'All' } },
-        { key: 'active', label: { fr: 'En cours', ar: 'جاري', en: 'Active' } },
-        { key: 'closed', label: { fr: 'Clôturé', ar: 'مختتم', en: 'Closed' } },
+        { key: 'all', label: { fr: 'Tous', ar: 'الكل' } },
+        { key: 'active', label: { fr: 'En cours', ar: 'جاري' } },
+        { key: 'closed', label: { fr: 'Clôturé', ar: 'مختتم' } },
     ];
 
     const filteredProgrammes = filter === 'all'

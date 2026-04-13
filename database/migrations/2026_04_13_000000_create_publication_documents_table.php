@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title_fr');
             $table->string('title_ar');
-            $table->string('title_en');
             $table->text('description_fr');
             $table->text('description_ar');
-            $table->text('description_en');
             $table->string('category');
             $table->date('published_at');
             $table->string('file_path');

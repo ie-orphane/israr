@@ -4,8 +4,8 @@ import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, BadgeInfo, CalendarDays, Download, FileText, Handshake, MapPin, Users } from 'lucide-react';
 
 const statusLabels = {
-    active: { fr: 'En cours', ar: 'جاري', en: 'Active' },
-    closed: { fr: 'Clôturé', ar: 'مختتم', en: 'Closed' },
+    active: { fr: 'En cours', ar: 'جاري' },
+    closed: { fr: 'Clôturé', ar: 'مختتم' },
 };
 
 export default function ProgrammeShow({ programme }) {
@@ -21,14 +21,13 @@ export default function ProgrammeShow({ programme }) {
                                 <TransText
                                     fr={statusLabels[programme.status]?.fr ?? programme.status}
                                     ar={statusLabels[programme.status]?.ar ?? programme.status}
-                                    en={statusLabels[programme.status]?.en ?? programme.status}
                                 />
                             </span>
                             <h1 className="text-3xl font-bold md:text-5xl">
-                                <TransText fr={programme.title_fr} ar={programme.title_ar} en={programme.title_en} />
+                                <TransText fr={programme.title_fr} ar={programme.title_ar} />
                             </h1>
                             <p className="mt-4 max-w-2xl text-base text-white/80 md:text-lg">
-                                <TransText fr={programme.summary_fr} ar={programme.summary_ar} en={programme.summary_en} />
+                                <TransText fr={programme.summary_fr} ar={programme.summary_ar} />
                             </p>
                         </div>
                     </div>
@@ -55,7 +54,7 @@ export default function ProgrammeShow({ programme }) {
                                             {programme.beneficiaires.toLocaleString('fr-FR')}
                                         </p>
                                         <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                                            <TransText fr="Bénéficiaires" ar="المستفيدات" en="Beneficiaries" />
+                                            <TransText fr="Bénéficiaires" ar="المستفيدات" />
                                         </p>
                                     </div>
                                 )}
@@ -65,14 +64,10 @@ export default function ProgrammeShow({ programme }) {
                                             <MapPin className="h-5 w-5" />
                                         </div>
                                         <p className="text-base font-semibold text-[var(--color-alpha)]">
-                                            <TransText
-                                                fr={programme.region_fr}
-                                                ar={programme.region_ar ?? programme.region_fr}
-                                                en={programme.region_en ?? programme.region_fr}
-                                            />
+                                            <TransText fr={programme.region_fr} ar={programme.region_ar ?? programme.region_fr} />
                                         </p>
                                         <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                                            <TransText fr="Zone d'intervention" ar="مجال التدخل" en="Area of intervention" />
+                                            <TransText fr="Zone d'intervention" ar="مجال التدخل" />
                                         </p>
                                     </div>
                                 )}
@@ -83,7 +78,7 @@ export default function ProgrammeShow({ programme }) {
                                         </div>
                                         <p className="text-base font-semibold text-[var(--color-alpha)]">{programme.budget}</p>
                                         <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                                            <TransText fr="Budget" ar="الميزانية" en="Budget" />
+                                            <TransText fr="Budget" ar="الميزانية" />
                                         </p>
                                     </div>
                                 )}
@@ -92,10 +87,10 @@ export default function ProgrammeShow({ programme }) {
 
                         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-700">
                             <h2 className="mb-4 text-xl font-bold text-[var(--color-alpha)]">
-                                <TransText fr="Présentation du programme" ar="تقديم البرنامج" en="Programme overview" />
+                                <TransText fr="Présentation du programme" ar="تقديم البرنامج" />
                             </h2>
                             <p className="text-sm leading-7 text-neutral-600 md:text-base dark:text-neutral-300">
-                                <TransText fr={programme.summary_fr} ar={programme.summary_ar} en={programme.summary_en} />
+                                <TransText fr={programme.summary_fr} ar={programme.summary_ar} />
                             </p>
                         </div>
                     </div>
@@ -103,21 +98,17 @@ export default function ProgrammeShow({ programme }) {
                     <aside className="space-y-6">
                         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-700">
                             <h2 className="mb-4 text-lg font-bold text-[var(--color-alpha)]">
-                                <TransText fr="Informations rapides" ar="معلومات سريعة" en="Quick facts" />
+                                <TransText fr="Informations rapides" ar="معلومات سريعة" />
                             </h2>
                             <div className="space-y-4 text-sm">
                                 <div className="flex items-start gap-3">
                                     <CalendarDays className="mt-0.5 h-4 w-4 text-[var(--color-beta)]" />
                                     <div>
                                         <p className="font-medium text-[var(--color-alpha)]">
-                                            <TransText fr="Statut" ar="الحالة" en="Status" />
+                                            <TransText fr="Statut" ar="الحالة" />
                                         </p>
                                         <p className="text-neutral-600 dark:text-neutral-300">
-                                            <TransText
-                                                fr={statusLabels[programme.status]?.fr ?? programme.status}
-                                                ar={statusLabels[programme.status]?.ar ?? programme.status}
-                                                en={statusLabels[programme.status]?.en ?? programme.status}
-                                            />
+                                            <TransText fr={statusLabels[programme.status]?.fr ?? programme.status} ar={statusLabels[programme.status]?.ar ?? programme.status} />
                                         </p>
                                     </div>
                                 </div>
@@ -125,14 +116,10 @@ export default function ProgrammeShow({ programme }) {
                                     <MapPin className="mt-0.5 h-4 w-4 text-[var(--color-beta)]" />
                                     <div>
                                         <p className="font-medium text-[var(--color-alpha)]">
-                                            <TransText fr="Région" ar="الجهة" en="Region" />
+                                            <TransText fr="Région" ar="الجهة" />
                                         </p>
                                         <p className="text-neutral-600 dark:text-neutral-300">
-                                            <TransText
-                                                fr={programme.region_fr ?? '-'}
-                                                ar={programme.region_ar ?? programme.region_fr ?? '-'}
-                                                en={programme.region_en ?? programme.region_fr ?? '-'}
-                                            />
+                                            <TransText fr={programme.region_fr ?? '-'} ar={programme.region_ar ?? programme.region_fr ?? '-'} />
                                         </p>
                                     </div>
                                 </div>
@@ -141,7 +128,7 @@ export default function ProgrammeShow({ programme }) {
                                         <Handshake className="mt-0.5 h-4 w-4 text-[var(--color-beta)]" />
                                         <div>
                                             <p className="font-medium text-[var(--color-alpha)]">
-                                                <TransText fr="Partenaires" ar="الشركاء" en="Partners" />
+                                                <TransText fr="Partenaires" ar="الشركاء" />
                                             </p>
                                             <p className="text-neutral-600 dark:text-neutral-300">{programme.partenaires.join(', ')}</p>
                                         </div>
@@ -153,14 +140,10 @@ export default function ProgrammeShow({ programme }) {
                         {programme.project_file_url && (
                             <div className="rounded-3xl bg-[var(--color-alpha)] p-6 text-white shadow-sm">
                                 <h2 className="mb-3 text-lg font-bold">
-                                    <TransText fr="Fiche projet" ar="ملف المشروع" en="Project sheet" />
+                                    <TransText fr="Fiche projet" ar="ملف المشروع" />
                                 </h2>
                                 <p className="mb-4 text-sm text-white/80">
-                                    <TransText
-                                        fr="Téléchargez le document détaillé du programme."
-                                        ar="حمّل الوثيقة التفصيلية للبرنامج."
-                                        en="Download the detailed programme document."
-                                    />
+                                    <TransText fr="Téléchargez le document détaillé du programme." ar="حمّل الوثيقة التفصيلية للبرنامج." />
                                 </p>
                                 <a
                                     href={programme.project_file_url}
@@ -176,7 +159,7 @@ export default function ProgrammeShow({ programme }) {
 
                         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-700">
                             <h2 className="mb-4 text-lg font-bold text-[var(--color-alpha)]">
-                                <TransText fr="Actions" ar="إجراءات" en="Actions" />
+                                <TransText fr="Actions" ar="إجراءات" />
                             </h2>
                             <div className="space-y-3">
                                 <Link
@@ -184,14 +167,14 @@ export default function ProgrammeShow({ programme }) {
                                     className="flex items-center justify-center gap-2 rounded-lg border border-[var(--color-alpha)]/20 px-4 py-2.5 text-sm font-medium text-[var(--color-alpha)] transition hover:bg-[var(--color-alpha)] hover:text-white"
                                 >
                                     <ArrowLeft className="h-4 w-4" />
-                                    <TransText fr="Retour à la liste" ar="العودة إلى اللائحة" en="Back to list" />
+                                    <TransText fr="Retour à la liste" ar="العودة إلى اللائحة" />
                                 </Link>
                                 <Link
                                     href="/contact"
                                     className="flex items-center justify-center gap-2 rounded-lg bg-[var(--color-alpha)] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[var(--color-alpha)]/90"
                                 >
                                     <FileText className="h-4 w-4" />
-                                    <TransText fr="Nous contacter" ar="اتصلوا بنا" en="Contact us" />
+                                    <TransText fr="Nous contacter" ar="اتصلوا بنا" />
                                 </Link>
                             </div>
                         </div>

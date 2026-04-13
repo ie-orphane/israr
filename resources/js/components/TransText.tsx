@@ -3,23 +3,23 @@ import React, { useCallback, useEffect, useState } from "react";
 interface TextProps {
   ar: string;
   fr: string;
-  en: string;
+  en?: string;
   sw?: string;
   pr?: string;
 }
 
 const TransText: React.FC<TextProps> = (props) => {
-  const allowedLanguages = ["ar", "fr", "en", "sw", "pr"] as const;
+  const allowedLanguages = ["ar", "fr"] as const;
 
-  const readLang = useCallback((): "ar" | "fr" | "en" | "sw" | "pr" => {
-    if (typeof window === "undefined") return "en";
-    const saved = window.localStorage.getItem("lang") || "en";
+  const readLang = useCallback((): "ar" | "fr" => {
+    if (typeof window === "undefined") return "fr";
+    const saved = window.localStorage.getItem("lang") || "fr";
     return (allowedLanguages as readonly string[]).includes(saved)
-      ? (saved as "ar" | "fr" | "en" | "sw" | "pr")
-      : "en";
+      ? (saved as "ar" | "fr")
+      : "fr";
   }, []);
 
-  const [selectedLanguage, setSelectedLanguage] = useState<"ar" | "fr" | "en" | "sw" | "pr">(readLang());
+  const [selectedLanguage, setSelectedLanguage] = useState<"ar" | "fr">(readLang());
 
   useEffect(() => {
     const onChange: EventListener = () => setSelectedLanguage(readLang());
@@ -32,7 +32,7 @@ const TransText: React.FC<TextProps> = (props) => {
   }, [readLang]);
 
   const dictionary = props as unknown as Record<string, string>;
-  const text = dictionary[selectedLanguage] ? dictionary[selectedLanguage] : dictionary["en"];
+  const text = dictionary[selectedLanguage] ? dictionary[selectedLanguage] : dictionary["fr"];
 
   return (
     <span dir={selectedLanguage === "ar" ? "rtl" : "ltr"} dangerouslySetInnerHTML={{ __html: text?.replace(/\n/g, "<br />") }} />

@@ -22,10 +22,8 @@ class PublicationController extends Controller
                 'id',
                 'title_fr',
                 'title_ar',
-                'title_en',
                 'description_fr',
                 'description_ar',
-                'description_en',
                 'category',
                 'published_at',
                 'file_path',
@@ -35,10 +33,8 @@ class PublicationController extends Controller
                 'id' => $publication->id,
                 'title_fr' => $publication->title_fr,
                 'title_ar' => $publication->title_ar,
-                'title_en' => $publication->title_en,
                 'description_fr' => $publication->description_fr,
                 'description_ar' => $publication->description_ar,
-                'description_en' => $publication->description_en,
                 'category' => $publication->category,
                 'date' => $publication->published_at ? date('Y-m-d', strtotime((string) $publication->published_at)) : null,
                 'file_url' => asset('storage/' . $publication->file_path),
@@ -59,10 +55,8 @@ class PublicationController extends Controller
                 'id',
                 'title_fr',
                 'title_ar',
-                'title_en',
                 'description_fr',
                 'description_ar',
-                'description_en',
                 'category',
                 'published_at',
                 'file_path',
@@ -72,10 +66,8 @@ class PublicationController extends Controller
                 'id' => $publication->id,
                 'title_fr' => $publication->title_fr,
                 'title_ar' => $publication->title_ar,
-                'title_en' => $publication->title_en,
                 'description_fr' => $publication->description_fr,
                 'description_ar' => $publication->description_ar,
-                'description_en' => $publication->description_en,
                 'category' => $publication->category,
                 'date' => $publication->published_at ? date('Y-m-d', strtotime((string) $publication->published_at)) : null,
                 'file_url' => $publication->file_path ? asset('storage/' . $publication->file_path) : null,
@@ -92,10 +84,8 @@ class PublicationController extends Controller
         $validated = $request->validate([
             'title_fr' => ['required', 'string', 'max:255'],
             'title_ar' => ['required', 'string', 'max:255'],
-            'title_en' => ['required', 'string', 'max:255'],
             'description_fr' => ['required', 'string'],
             'description_ar' => ['required', 'string'],
-            'description_en' => ['required', 'string'],
             'category' => ['required', 'in:rapport,plaidoyer,communique,guide'],
             'published_at' => ['required', 'date'],
             'document' => ['required', 'file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx', 'max:10240'],
@@ -107,10 +97,8 @@ class PublicationController extends Controller
         PublicationDocument::query()->create([
             'title_fr' => $validated['title_fr'],
             'title_ar' => $validated['title_ar'],
-            'title_en' => $validated['title_en'],
             'description_fr' => $validated['description_fr'],
             'description_ar' => $validated['description_ar'],
-            'description_en' => $validated['description_en'],
             'category' => $validated['category'],
             'published_at' => $validated['published_at'],
             'file_path' => $documentPath,
@@ -125,10 +113,8 @@ class PublicationController extends Controller
         $validated = $request->validate([
             'title_fr' => ['required', 'string', 'max:255'],
             'title_ar' => ['required', 'string', 'max:255'],
-            'title_en' => ['required', 'string', 'max:255'],
             'description_fr' => ['required', 'string'],
             'description_ar' => ['required', 'string'],
-            'description_en' => ['required', 'string'],
             'category' => ['required', 'in:rapport,plaidoyer,communique,guide'],
             'published_at' => ['required', 'date'],
             'document' => ['nullable', 'file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx', 'max:10240'],
@@ -145,10 +131,8 @@ class PublicationController extends Controller
 
         $publication->title_fr = $validated['title_fr'];
         $publication->title_ar = $validated['title_ar'];
-        $publication->title_en = $validated['title_en'];
         $publication->description_fr = $validated['description_fr'];
         $publication->description_ar = $validated['description_ar'];
-        $publication->description_en = $validated['description_en'];
         $publication->category = $validated['category'];
         $publication->published_at = $validated['published_at'];
         $publication->is_published = (bool) ($validated['is_published'] ?? false);

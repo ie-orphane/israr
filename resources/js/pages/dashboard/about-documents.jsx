@@ -16,7 +16,7 @@ const breadcrumbs = [
 
 export default function AboutDocuments({ documents = [] }) {
     const { flash, errors: pageErrors = {} } = usePage().props;
-    const hasCreateErrors = Boolean(pageErrors.title_fr || pageErrors.title_ar || pageErrors.title_en || pageErrors.document || pageErrors.is_published);
+    const hasCreateErrors = Boolean(pageErrors.title_fr || pageErrors.title_ar || pageErrors.document || pageErrors.is_published);
 
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(hasCreateErrors);
     const [openEditDocumentId, setOpenEditDocumentId] = useState(null);
@@ -49,7 +49,7 @@ export default function AboutDocuments({ documents = [] }) {
                         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl">
                             <DialogHeader>
                                 <DialogTitle>Ajouter un document</DialogTitle>
-                                <DialogDescription>Les titres en FR/AR/EN et le fichier sont obligatoires.</DialogDescription>
+                                <DialogDescription>Les titres en FR/AR et le fichier sont obligatoires.</DialogDescription>
                             </DialogHeader>
 
                             <Form method="post" action="/admin/about-documents" encType="multipart/form-data" className="grid gap-4 md:grid-cols-2" onSuccess={() => setIsCreateModalOpen(false)}>
@@ -64,11 +64,6 @@ export default function AboutDocuments({ documents = [] }) {
                                             <Label htmlFor="title_ar">Titre (AR)</Label>
                                             <Input id="title_ar" name="title_ar" required />
                                             <InputError message={errors.title_ar} />
-                                        </div>
-                                        <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="title_en">Titre (EN)</Label>
-                                            <Input id="title_en" name="title_en" required />
-                                            <InputError message={errors.title_en} />
                                         </div>
                                         <div className="grid gap-2 md:col-span-2">
                                             <Label htmlFor="document">Fichier</Label>
@@ -151,11 +146,6 @@ export default function AboutDocuments({ documents = [] }) {
                                                                                 <Label htmlFor={`edit-title-ar-${document.id}`}>Titre (AR)</Label>
                                                                                 <Input id={`edit-title-ar-${document.id}`} name="title_ar" required defaultValue={document.title_ar} />
                                                                                 <InputError message={errors.title_ar} />
-                                                                            </div>
-                                                                            <div className="grid gap-2 md:col-span-2">
-                                                                                <Label htmlFor={`edit-title-en-${document.id}`}>Titre (EN)</Label>
-                                                                                <Input id={`edit-title-en-${document.id}`} name="title_en" required defaultValue={document.title_en} />
-                                                                                <InputError message={errors.title_en} />
                                                                             </div>
                                                                             <div className="grid gap-2 md:col-span-2">
                                                                                 <Label htmlFor={`edit-document-${document.id}`}>Remplacer le fichier (optionnel)</Label>

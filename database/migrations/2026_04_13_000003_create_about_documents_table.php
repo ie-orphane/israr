@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->string('title_fr');
             $table->string('title_ar');
-            $table->string('title_en');
             $table->string('file_path');
             $table->boolean('is_published')->default(true);
             $table->timestamps();

@@ -30,7 +30,7 @@ const categories = [
 export default function DashboardPublications({ publications = [] }) {
     const { flash, errors: pageErrors = {} } = usePage().props;
     const hasCreateErrors = Boolean(
-        pageErrors.title_fr || pageErrors.title_ar || pageErrors.title_en || pageErrors.description_fr || pageErrors.description_ar || pageErrors.description_en || pageErrors.category || pageErrors.published_at || pageErrors.document || pageErrors.is_published
+        pageErrors.title_fr || pageErrors.title_ar || pageErrors.description_fr || pageErrors.description_ar || pageErrors.category || pageErrors.published_at || pageErrors.document || pageErrors.is_published
     );
 
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(hasCreateErrors);
@@ -71,9 +71,7 @@ export default function DashboardPublications({ publications = [] }) {
                         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
                             <DialogHeader>
                                 <DialogTitle>Ajouter un document</DialogTitle>
-                                <DialogDescription>
-                                    Les informations FR/AR/EN sont obligatoires pour l'affichage multilingue.
-                                </DialogDescription>
+                                <DialogDescription>Les informations FR/AR sont obligatoires pour l'affichage bilingue.</DialogDescription>
                             </DialogHeader>
 
                             <Form
@@ -98,12 +96,6 @@ export default function DashboardPublications({ publications = [] }) {
                                         </div>
 
                                         <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="title_en">Titre (EN)</Label>
-                                            <Input id="title_en" name="title_en" required />
-                                            <InputError message={errors.title_en} />
-                                        </div>
-
-                                        <div className="grid gap-2 md:col-span-2">
                                             <Label htmlFor="description_fr">Description (FR)</Label>
                                             <textarea id="description_fr" name="description_fr" required className="min-h-24 rounded-md border px-3 py-2 text-sm" />
                                             <InputError message={errors.description_fr} />
@@ -113,12 +105,6 @@ export default function DashboardPublications({ publications = [] }) {
                                             <Label htmlFor="description_ar">Description (AR)</Label>
                                             <textarea id="description_ar" name="description_ar" required className="min-h-24 rounded-md border px-3 py-2 text-sm" />
                                             <InputError message={errors.description_ar} />
-                                        </div>
-
-                                        <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="description_en">Description (EN)</Label>
-                                            <textarea id="description_en" name="description_en" required className="min-h-24 rounded-md border px-3 py-2 text-sm" />
-                                            <InputError message={errors.description_en} />
                                         </div>
 
                                         <div className="grid gap-2">
@@ -286,12 +272,6 @@ export default function DashboardPublications({ publications = [] }) {
                                                                         </div>
 
                                                                         <div className="grid gap-2 md:col-span-2">
-                                                                            <Label htmlFor={`edit-title-en-${publication.id}`}>Titre (EN)</Label>
-                                                                            <Input id={`edit-title-en-${publication.id}`} name="title_en" required defaultValue={publication.title_en} />
-                                                                            <InputError message={errors.title_en} />
-                                                                        </div>
-
-                                                                        <div className="grid gap-2 md:col-span-2">
                                                                             <Label htmlFor={`edit-description-fr-${publication.id}`}>Description (FR)</Label>
                                                                             <textarea
                                                                                 id={`edit-description-fr-${publication.id}`}
@@ -313,18 +293,6 @@ export default function DashboardPublications({ publications = [] }) {
                                                                                 className="min-h-24 rounded-md border px-3 py-2 text-sm"
                                                                             />
                                                                             <InputError message={errors.description_ar} />
-                                                                        </div>
-
-                                                                        <div className="grid gap-2 md:col-span-2">
-                                                                            <Label htmlFor={`edit-description-en-${publication.id}`}>Description (EN)</Label>
-                                                                            <textarea
-                                                                                id={`edit-description-en-${publication.id}`}
-                                                                                name="description_en"
-                                                                                required
-                                                                                defaultValue={publication.description_en}
-                                                                                className="min-h-24 rounded-md border px-3 py-2 text-sm"
-                                                                            />
-                                                                            <InputError message={errors.description_en} />
                                                                         </div>
 
                                                                         <div className="grid gap-2">

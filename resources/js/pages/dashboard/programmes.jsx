@@ -30,16 +30,13 @@ export default function DashboardProgrammes({ programmes = [] }) {
     const hasCreateErrors = Boolean(
         pageErrors.title_fr ||
             pageErrors.title_ar ||
-            pageErrors.title_en ||
             pageErrors.summary_fr ||
             pageErrors.summary_ar ||
-            pageErrors.summary_en ||
                 pageErrors.image ||
             pageErrors.status ||
             pageErrors.beneficiaires ||
             pageErrors.region_fr ||
             pageErrors.region_ar ||
-            pageErrors.region_en ||
             pageErrors.partners ||
             pageErrors.budget ||
                 pageErrors.project_file ||
@@ -79,7 +76,7 @@ export default function DashboardProgrammes({ programmes = [] }) {
                         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
                             <DialogHeader>
                                 <DialogTitle>Ajouter un programme</DialogTitle>
-                                <DialogDescription>Remplissez les champs FR/AR/EN et les informations d'impact.</DialogDescription>
+                                <DialogDescription>Remplissez les champs FR/AR et les informations d'impact.</DialogDescription>
                             </DialogHeader>
 
                             <Form method="post" action="/admin/programmes" className="grid gap-4 md:grid-cols-2" encType="multipart/form-data" onSuccess={() => setIsCreateModalOpen(false)}>
@@ -95,11 +92,6 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                             <Input id="title_ar" name="title_ar" required />
                                             <InputError message={errors.title_ar} />
                                         </div>
-                                        <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="title_en">Titre (EN)</Label>
-                                            <Input id="title_en" name="title_en" required />
-                                            <InputError message={errors.title_en} />
-                                        </div>
 
                                         <div className="grid gap-2 md:col-span-2">
                                             <Label htmlFor="summary_fr">Description (FR)</Label>
@@ -110,11 +102,6 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                             <Label htmlFor="summary_ar">Description (AR)</Label>
                                             <textarea id="summary_ar" name="summary_ar" required className="min-h-24 rounded-md border px-3 py-2 text-sm" />
                                             <InputError message={errors.summary_ar} />
-                                        </div>
-                                        <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="summary_en">Description (EN)</Label>
-                                            <textarea id="summary_en" name="summary_en" required className="min-h-24 rounded-md border px-3 py-2 text-sm" />
-                                            <InputError message={errors.summary_en} />
                                         </div>
 
                                         <div className="grid gap-2 md:col-span-2">
@@ -150,11 +137,6 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                             <Label htmlFor="region_ar">Region (AR)</Label>
                                             <Input id="region_ar" name="region_ar" />
                                             <InputError message={errors.region_ar} />
-                                        </div>
-                                        <div className="grid gap-2 md:col-span-2">
-                                            <Label htmlFor="region_en">Region (EN)</Label>
-                                            <Input id="region_en" name="region_en" />
-                                            <InputError message={errors.region_en} />
                                         </div>
 
                                         <div className="grid gap-2 md:col-span-2">
@@ -263,11 +245,6 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                                                                 <Input id={`edit-title-ar-${programme.id}`} name="title_ar" required defaultValue={programme.title_ar} />
                                                                                 <InputError message={errors.title_ar} />
                                                                             </div>
-                                                                            <div className="grid gap-2 md:col-span-2">
-                                                                                <Label htmlFor={`edit-title-en-${programme.id}`}>Titre (EN)</Label>
-                                                                                <Input id={`edit-title-en-${programme.id}`} name="title_en" required defaultValue={programme.title_en} />
-                                                                                <InputError message={errors.title_en} />
-                                                                            </div>
 
                                                                             <div className="grid gap-2 md:col-span-2">
                                                                                 <Label htmlFor={`edit-summary-fr-${programme.id}`}>Description (FR)</Label>
@@ -279,17 +256,12 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                                                                 <textarea id={`edit-summary-ar-${programme.id}`} name="summary_ar" required defaultValue={programme.summary_ar} className="min-h-24 rounded-md border px-3 py-2 text-sm" />
                                                                                 <InputError message={errors.summary_ar} />
                                                                             </div>
-                                                                            <div className="grid gap-2 md:col-span-2">
-                                                                                <Label htmlFor={`edit-summary-en-${programme.id}`}>Description (EN)</Label>
-                                                                                <textarea id={`edit-summary-en-${programme.id}`} name="summary_en" required defaultValue={programme.summary_en} className="min-h-24 rounded-md border px-3 py-2 text-sm" />
-                                                                                <InputError message={errors.summary_en} />
-                                                                            </div>
 
                                                                             <div className="grid gap-2 md:col-span-2">
                                                                                 <Label htmlFor={`edit-image-${programme.id}`}>Remplacer l'image (optionnel)</Label>
                                                                                 <Input id={`edit-image-${programme.id}`} name="image" type="file" accept="image/png,image/jpeg,image/webp" className="cursor-pointer" />
-                                                                                {programme.image_url && (
-                                                                                    <a href={programme.image_url} target="_blank" rel="noreferrer" className="text-xs text-[var(--color-beta)] underline underline-offset-2">
+                                                                                {programme.image && (
+                                                                                    <a href={programme.image} target="_blank" rel="noreferrer" className="text-xs text-[var(--color-beta)] underline underline-offset-2">
                                                                                         Voir l'image actuelle
                                                                                     </a>
                                                                                 )}
@@ -320,11 +292,6 @@ export default function DashboardProgrammes({ programmes = [] }) {
                                                                                 <Label htmlFor={`edit-region-ar-${programme.id}`}>Region (AR)</Label>
                                                                                 <Input id={`edit-region-ar-${programme.id}`} name="region_ar" defaultValue={programme.region_ar ?? ''} />
                                                                                 <InputError message={errors.region_ar} />
-                                                                            </div>
-                                                                            <div className="grid gap-2 md:col-span-2">
-                                                                                <Label htmlFor={`edit-region-en-${programme.id}`}>Region (EN)</Label>
-                                                                                <Input id={`edit-region-en-${programme.id}`} name="region_en" defaultValue={programme.region_en ?? ''} />
-                                                                                <InputError message={errors.region_en} />
                                                                             </div>
 
                                                                             <div className="grid gap-2 md:col-span-2">
