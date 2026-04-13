@@ -13,7 +13,7 @@ export default function AppLayout({ children, breadcrumbs, ...props }: AppLayout
     const page = usePage<SharedData>();
     const { auth } = page.props;
     const isAuthenticated = Boolean(auth && auth.user);
-    const usesSidebarLayout = ['/dashboard', '/settings'].some((prefix) => page.url.startsWith(prefix));
+    const usesSidebarLayout = ['/admin', '/settings'].some((prefix) => page.url.startsWith(prefix));
 
     const LayoutComponent = isAuthenticated && usesSidebarLayout ? AppSidebarLayout : AppHeaderLayout;
 

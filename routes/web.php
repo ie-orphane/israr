@@ -2,25 +2,85 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PublicationController;
 use App\Models\AideRequest;
+use App\Models\Contact;
+use App\Models\Partner;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    $partners = Partner::query()
+        ->active()
+        ->ordered()
+        ->get(['id', 'name', 'website_url', 'logo_path'])
+        ->map(fn (Partner $partner) => [
+            'id' => $partner->id,
+            'name' => $partner->name,
+            'website_url' => $partner->website_url,
+            'logo_url' => $partner->logo_path ? asset('storage/' . $partner->logo_path) : null,
+        ]);
+
+    return Inertia::render('welcome', [
+        'partners' => $partners,
+    ]);
 })->name('home');
 
 Route::get('/a-propos', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::get('dashboard/aide-requests', function () {
+    Route::get('messages', function () {
+        $messages = Contact::query()
+            ->latest()
+            ->get(['id', 'name', 'email', 'subject', 'message', 'created_at'])
+            ->map(fn (Contact $contact) => [
+                'id' => $contact->id,
+                'name' => $contact->name,
+                'email' => $contact->email,
+                'subject' => $contact->subject,
+                'message' => $contact->message,
+                'created_at' => $contact->created_at?->toIso8601String(),
+            ]);
+
+        return Inertia::render('dashboard/messages', [
+            'messages' => $messages,
+        ]);
+    })->name('dashboard.messages.index');
+
+    Route::get('partners', function () {
+        $partners = Partner::query()
+            ->ordered()
+            ->get(['id', 'name', 'website_url', 'logo_path', 'is_active', 'sort_order'])
+            ->map(fn (Partner $partner) => [
+                'id' => $partner->id,
+                'name' => $partner->name,
+                'website_url' => $partner->website_url,
+                'logo_url' => $partner->logo_path ? asset('storage/' . $partner->logo_path) : null,
+                'is_active' => $partner->is_active,
+                'sort_order' => $partner->sort_order,
+            ]);
+
+        return Inertia::render('dashboard/partners', [
+            'partners' => $partners,
+        ]);
+    })->name('dashboard.partners.index');
+
+    Route::post('partners', [PartnerController::class, 'store'])->name('dashboard.partners.store');
+    Route::put('partners/{partner}', [PartnerController::class, 'update'])->name('dashboard.partners.update');
+    Route::delete('partners/{partner}', [PartnerController::class, 'destroy'])->name('dashboard.partners.destroy');
+    Route::get('publications', [PublicationController::class, 'dashboardIndex'])->name('dashboard.publications.index');
+    Route::post('publications', [PublicationController::class, 'store'])->name('dashboard.publications.store');
+    Route::put('publications/{publication}', [PublicationController::class, 'update'])->name('dashboard.publications.update');
+    Route::delete('publications/{publication}', [PublicationController::class, 'destroy'])->name('dashboard.publications.destroy');
+
+    Route::get('aide-requests', function () {
         $aideRequests = AideRequest::query()
             ->latest()
             ->limit(30)

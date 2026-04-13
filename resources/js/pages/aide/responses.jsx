@@ -6,11 +6,11 @@ import { Badge } from '@/components/ui/badge';
 const breadcrumbs = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
     },
     {
         title: "Reponses d'aide",
-        href: '/dashboard/aide-requests',
+        href: '/admin/aide-requests',
     },
 ];
 
@@ -87,9 +87,6 @@ export default function AideResponses({ aideRequests = [] }) {
                 </div>
 
                 <Card>
-                    <CardHeader>
-                        <CardTitle>Reponses enregistrees</CardTitle>
-                    </CardHeader>
                     <CardContent>
                         {aideRequests.length === 0 ? (
                             <p className="text-sm text-muted-foreground">Aucune reponse recue pour le moment.</p>

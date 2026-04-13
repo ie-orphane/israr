@@ -41,7 +41,7 @@ function AnimatedCounter({ target, prefix = '' }) {
     return <span ref={ref}>{prefix}{formatted}</span>;
 }
 
-export default function Welcome() {
+export default function Welcome({ partners = [] }) {
     const carouselSlides = [
         {
             src: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&fit=crop&w=1600&q=80',
@@ -103,14 +103,10 @@ export default function Welcome() {
         { value: 15000, prefix: '+', label: { fr: 'Bénéficiaires accompagnées', ar: 'مستفيدة تمت مواكبتها', en: 'Beneficiaries supported' }, icon: Users },
         { value: 8, prefix: '', label: { fr: 'Régions couvertes', ar: 'جهات مغطاة', en: 'Regions covered' }, icon: Globe },
         { value: 19, prefix: '', label: { fr: 'Associations membres', ar: 'جمعية عضو', en: 'Member associations' }, icon: Handshake },
-        { value: 12, prefix: '', label: { fr: 'Partenaires institutionnels', ar: 'شريك مؤسساتي', en: 'Institutional partners' }, icon: ShieldCheck },
+        { value: partners.length, prefix: '', label: { fr: 'Partenaires institutionnels', ar: 'شريك مؤسساتي', en: 'Institutional partners' }, icon: ShieldCheck },
     ];
 
-    const partners = [
-        'AFD', 'ONU Femmes', 'UNFPA', 'Union Européenne',
-        'Ministère de la Solidarité', 'GIZ', 'Fondation Friedrich Ebert',
-        'Ambassade des Pays-Bas', 'Oxfam', 'USAID',
-    ];
+    const displayedPartners = partners;
 
     const testimonials = [
         {
@@ -497,41 +493,56 @@ export default function Welcome() {
                     </section>
 
                     {/* Institutional Partners Carousel */}
-                    <section className="border-y border-[var(--color-alpha)]/10 bg-neutral-50 py-12 dark:bg-neutral-900/40">
-                        <div className="mx-auto max-w-6xl px-6">
-                            <h2 className="mb-8 text-center text-xl font-bold text-[var(--color-alpha)] md:text-2xl">
-                                <TransText
-                                    fr="Nos partenaires institutionnels"
-                                    ar="شركاؤنا المؤسساتيون"
-                                    en="Our institutional partners"
-                                />
-                            </h2>
-                            <div className="relative overflow-hidden">
-                                <div className="animate-marquee flex gap-12 whitespace-nowrap">
-                                    {[...partners, ...partners].map((name, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="flex h-16 min-w-[160px] items-center justify-center rounded-lg bg-white px-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700"
-                                        >
-                                            <span className="text-sm font-semibold text-neutral-600 dark:text-neutral-300">{name}</span>
-                                        </div>
-                                    ))}
+                    {displayedPartners.length > 0 && (
+                        <section className="border-y border-[var(--color-alpha)]/10 bg-neutral-50 py-12 dark:bg-neutral-900/40">
+                            <div className="mx-auto max-w-6xl px-6">
+                                <h2 className="mb-8 text-center text-xl font-bold text-[var(--color-alpha)] md:text-2xl">
+                                    <TransText
+                                        fr="Nos partenaires institutionnels"
+                                        ar="شركاؤنا المؤسساتيون"
+                                        en="Our institutional partners"
+                                    />
+                                </h2>
+                                <div className="relative overflow-hidden">
+                                    <div className="animate-marquee flex gap-12 whitespace-nowrap">
+                                        {[...displayedPartners, ...displayedPartners].map((partner, idx) => (
+                                            <div
+                                                key={`${partner.id}-${idx}`}
+                                                className="flex h-16 min-w-[160px] items-center justify-center rounded-lg bg-white px-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700"
+                                            >
+                                                {partner.logo_url ? (
+                                                    <img src={partner.logo_url} alt={partner.name} className="h-10 max-w-[130px] object-contain" />
+                                                ) : partner.website_url ? (
+                                                    <a
+                                                        href={partner.website_url}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="text-sm font-semibold text-neutral-600 underline underline-offset-2 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
+                                                    >
+                                                        {partner.name}
+                                                    </a>
+                                                ) : (
+                                                    <span className="text-sm font-semibold text-neutral-600 dark:text-neutral-300">{partner.name}</span>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <style>{`
-                            @keyframes marquee {
-                                0% { transform: translateX(0); }
-                                100% { transform: translateX(-50%); }
-                            }
-                            .animate-marquee {
-                                animation: marquee 30s linear infinite;
-                            }
-                            .animate-marquee:hover {
-                                animation-play-state: paused;
-                            }
-                        `}</style>
-                    </section>
+                            <style>{`
+                                @keyframes marquee {
+                                    0% { transform: translateX(0); }
+                                    100% { transform: translateX(-50%); }
+                                }
+                                .animate-marquee {
+                                    animation: marquee 30s linear infinite;
+                                }
+                                .animate-marquee:hover {
+                                    animation-play-state: paused;
+                                }
+                            `}</style>
+                        </section>
+                    )}
 
                     {/* Opportunities & CTA */}
                     <section className="mx-auto max-w-6xl px-6 py-16">

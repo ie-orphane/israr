@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const breadcrumbs = [
     {
         title: 'Dashboard',
-        href: "/",
+        href: '/admin/dashboard',
     },
 ];
 
@@ -22,19 +22,63 @@ export default function Dashboard() {
                     </p>
                 </div>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Demandes d'aide</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="mb-4 text-sm text-muted-foreground">
-                            Les reponses du formulaire d'aide sont maintenant disponibles sur une page dediee.
-                        </p>
-                        <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
-                            <Link href="/dashboard/aide-requests">Ouvrir les reponses d'aide</Link>
-                        </Button>
-                    </CardContent>
-                </Card>
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Demandes d'aide</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Les reponses du formulaire d'aide sont maintenant disponibles sur une page dediee.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/aide-requests">Ouvrir les reponses d'aide</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Gestion des partenaires</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Ajoutez et visualisez les partenaires depuis une page dediee.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/partners">Ouvrir la gestion des partenaires</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Gestion des publications</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Ajoutez des documents qui seront affiches automatiquement sur la page publique /publications.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/publications">Ouvrir la gestion des publications</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Messages de contact</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Consultez tous les messages recus depuis le formulaire de contact public.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/messages">Ouvrir les messages</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </AppLayout>
     );

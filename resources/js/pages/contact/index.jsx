@@ -1,9 +1,9 @@
 import AppLayout from '@/layouts/app-layout';
-import { Head } from '@inertiajs/react';
+import InputError from '@/components/input-error';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import TransText from '@components/TransText';
 import { Button } from '@/components/ui/button';
-import { Mail, MapPin, Phone, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
-import { useState } from 'react';
+import { Mail, MapPin, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
 
 function XIcon(props) {
     return (
@@ -60,14 +60,21 @@ const socialLinks = [
 ];
 
 export default function Contact() {
-    const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const { flash } = usePage().props;
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        post('/contact', {
+            preserveScroll: true,
+            onSuccess: () => reset('subject', 'message'),
+        });
     };
 
     return (
@@ -155,6 +162,11 @@ export default function Contact() {
                                 <h2 className="mb-4 text-xl font-bold text-[var(--color-alpha)]">
                                     <TransText fr="Formulaire de contact" ar="نموذج الاتصال" en="Contact form" />
                                 </h2>
+                                {flash?.success && (
+                                    <p className="mb-4 rounded-md border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-700">
+                                        {flash.success}
+                                    </p>
+                                )}
                                 <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700">
                                     <div className="grid gap-4 sm:grid-cols-2">
                                         <div>
@@ -164,11 +176,12 @@ export default function Contact() {
                                             <input
                                                 type="text"
                                                 name="name"
-                                                value={formData.name}
-                                                onChange={handleChange}
+                                                value={data.name}
+                                                onChange={(e) => setData('name', e.target.value)}
                                                 className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-beta)] focus:outline-none focus:ring-1 focus:ring-[var(--color-beta)] dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
                                                 required
                                             />
+                                            <InputError message={errors.name} className="mt-1" />
                                         </div>
                                         <div>
                                             <label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-200">
@@ -177,11 +190,12 @@ export default function Contact() {
                                             <input
                                                 type="email"
                                                 name="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
                                                 className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-beta)] focus:outline-none focus:ring-1 focus:ring-[var(--color-beta)] dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
                                                 required
                                             />
+                                            <InputError message={errors.email} className="mt-1" />
                                         </div>
                                     </div>
                                     <div>
@@ -191,11 +205,12 @@ export default function Contact() {
                                         <input
                                             type="text"
                                             name="subject"
-                                            value={formData.subject}
-                                            onChange={handleChange}
+                                            value={data.subject}
+                                            onChange={(e) => setData('subject', e.target.value)}
                                             className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-beta)] focus:outline-none focus:ring-1 focus:ring-[var(--color-beta)] dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
                                             required
                                         />
+                                        <InputError message={errors.subject} className="mt-1" />
                                     </div>
                                     <div>
                                         <label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-200">
@@ -203,16 +218,17 @@ export default function Contact() {
                                         </label>
                                         <textarea
                                             name="message"
-                                            value={formData.message}
-                                            onChange={handleChange}
+                                            value={data.message}
+                                            onChange={(e) => setData('message', e.target.value)}
                                             rows={5}
                                             className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-beta)] focus:outline-none focus:ring-1 focus:ring-[var(--color-beta)] dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
                                             required
                                         />
+                                        <InputError message={errors.message} className="mt-1" />
                                     </div>
-                                    <Button type="submit" className="w-full bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
+                                    <Button type="submit" disabled={processing} className="w-full bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
                                         <Send className="mr-2 h-4 w-4" />
-                                        <TransText fr="Envoyer le message" ar="إرسال الرسالة" en="Send message" />
+                                        <TransText fr={processing ? 'Envoi en cours...' : 'Envoyer le message'} ar={processing ? 'جارٍ الإرسال...' : 'إرسال الرسالة'} en={processing ? 'Sending...' : 'Send message'} />
                                     </Button>
                                 </form>
                             </div>
