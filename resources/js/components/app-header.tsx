@@ -1,29 +1,30 @@
+import AppLogo from '@/components/app-logo';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { Icon } from '@/components/icon';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { UserMenuContent } from '@/components/user-menu-content';
-import { useInitials } from '@/hooks/use-initials';
-import { cn } from '@/lib/utils';
-import { dashboard } from '@/routes';
-import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
-import { AlignVerticalJustifyStartIcon, BookOpen, Folder, LayoutGrid, Menu, Search, ChevronDown, Info, FileText, Newspaper, HelpCircle, MapPin, Phone } from 'lucide-react';
-import AppLogo from '@/components/app-logo';
-import logoPurple from '../../../public/assets/images/logo_purple.png';
 import LanguageSwitch from '@/components/language-switch';
-import TransText from "@components/TransText";
+import { Button } from '@/components/ui/button';
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
+import TransText from '@components/TransText';
+import { Link, usePage } from '@inertiajs/react';
+import { FileText, HelpCircle, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { NavigationMenuContent, NavigationMenuTrigger, NavigationMenuLink } from '@/components/ui/navigation-menu';
+import logoPurple from '../../../public/assets/images/logo_purple.png';
 
 const mainNavItems: NavItem[] = [
     {
         title: <TransText ar="الرئيسية" fr="Accueil" en="Home" />,
-        href: "/",
+        href: '/',
         icon: null,
     },
     {
@@ -57,8 +58,6 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-
-
 const activeItemStyles = 'text-white';
 
 interface AppHeaderProps {
@@ -73,6 +72,29 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
         return saved === 'ar' ? 'ar' : 'fr';
     };
     const [isArabic, setIsArabic] = useState(readLang() === 'ar');
+
+    const getAideChildMeta = (href: string) => {
+        if (href.includes('/aide/formulaire')) {
+            return {
+                icon: HelpCircle,
+                description: {
+                    fr: "Demande d'accompagnement confidentielle",
+                    ar: 'طلب مواكبة بسرية تامة',
+                    en: 'Confidential support request',
+                },
+            };
+        }
+
+        return {
+            icon: FileText,
+            description: {
+                fr: 'Recherche de lois, jurisprudences et guides',
+                ar: 'البحث في القوانين والاجتهادات والدلائل',
+                en: 'Search laws, case law, and guides',
+            },
+        };
+    };
+
     useEffect(() => {
         const onChange = () => setIsArabic(readLang() === 'ar');
         window.addEventListener('language:change', onChange);
@@ -85,7 +107,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     return (
         <>
             <div className="bg-alpha text-[var(--color-light)] dark:bg-beta dark:text-white">
-                <div className={`mx-auto flex  items-center px-4 md:max-w-7xl`}>
+                <div className={`mx-auto flex items-center px-4 md:max-w-7xl`}>
                     {/* Mobile Menu */}
                     <div className="lg:hidden">
                         <Sheet>
@@ -94,7 +116,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                     <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="left" className="flex h-full w-64 flex-col items-stretch justify-between bg-[var(--color-alpha)] text-[var(--color-light)] dark:bg-[var(--color-alpha)] dark:text-white">
+                            <SheetContent
+                                side="left"
+                                className="flex h-full w-64 flex-col items-stretch justify-between bg-[var(--color-alpha)] text-[var(--color-light)] dark:bg-[var(--color-alpha)] dark:text-white"
+                            >
                                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                                 <SheetHeader className="flex justify-start text-left">
                                     <img src={logoPurple} alt="ISRAR" className="h-6 w-auto" />
@@ -106,20 +131,30 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                 <div key={idx}>
                                                     {item.children && item.children.length > 0 ? (
                                                         <div className="space-y-2">
-                                                            <Link href={item.href} className="flex items-center space-x-2 font-medium hover:text-[var(--color-beta)]">
+                                                            <Link
+                                                                href={item.href}
+                                                                className="flex items-center space-x-2 font-medium hover:text-[var(--color-beta)]"
+                                                            >
                                                                 {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
                                                                 <span>{item.title}</span>
                                                             </Link>
-                                                            <div className="ml-6 flex flex-col space-y-2">
+                                                            <div className="ml-6 flex flex-col space-y-1 rounded-lg border border-white/15 bg-white/5 p-2">
                                                                 {item.children.map((child, childIdx) => (
-                                                                    <Link key={childIdx} href={child.href} className="text-sm opacity-80 hover:text-[var(--color-beta)] hover:opacity-100">
+                                                                    <Link
+                                                                        key={childIdx}
+                                                                        href={child.href}
+                                                                        className="rounded-md px-3 py-2 text-sm font-medium text-white/90 transition"
+                                                                    >
                                                                         {child.title}
                                                                     </Link>
                                                                 ))}
                                                             </div>
                                                         </div>
                                                     ) : (
-                                                        <Link href={item.href} className="flex items-center space-x-2 font-medium hover:text-[var(--color-beta)]">
+                                                        <Link
+                                                            href={item.href}
+                                                            className="flex items-center space-x-2 font-medium hover:text-[var(--color-beta)]"
+                                                        >
                                                             {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
                                                             <span>{item.title}</span>
                                                         </Link>
@@ -127,10 +162,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                 </div>
                                             ))}
                                         </div>
-                                        <Button
-                                            asChild
-                                            className="bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90 w-full"
-                                        >
+                                        <Button asChild className="w-full bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
                                             <Link href="/aide/formulaire">
                                                 <TransText ar="أحتاج إلى المساعدة" fr="Je cherche de l'aide" en="I need help" />
                                             </Link>
@@ -146,30 +178,65 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="ml-6 hidden h-full items-center space-x-6 lg:flex" >
-                        <NavigationMenu className="flex h-full items-stretch" dir={isArabic ? 'rtl' : 'ltr'}>
+                    <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
+                        <NavigationMenu viewport={false} className="flex h-full items-stretch" dir={isArabic ? 'rtl' : 'ltr'}>
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
                                 {mainNavItems.map((item, index) => (
                                     <NavigationMenuItem key={index} className="relative flex h-full items-center">
                                         {item.children && item.children.length > 0 ? (
                                             <>
-                                                <NavigationMenuTrigger className={cn(
-                                                    'h-9 cursor-pointer px-3 hover:text-[var(--color-beta)] bg-transparent hover:bg-transparent focus:bg-transparent focus-visible:ring-0 focus-visible:outline-none text-[var(--color-light)]',
-                                                    page.url === (typeof item.href === 'string' ? item.href : item.href.url) && activeItemStyles,
-                                                )}>
+                                                <NavigationMenuTrigger
+                                                    className={cn(
+                                                        'h-9 cursor-pointer bg-transparent! px-3 text-[var(--color-light)] hover:bg-transparent hover:text-[var(--color-beta)] focus:bg-transparent focus:text-current focus-visible:ring-0 focus-visible:outline-none',
+                                                        page.url === (typeof item.href === 'string' ? item.href : item.href.url) && activeItemStyles,
+                                                    )}
+                                                >
                                                     {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
                                                     <span>{item.title}</span>
                                                 </NavigationMenuTrigger>
-                                                <NavigationMenuContent className="bg-[var(--color-alpha)] text-[var(--color-light)] border-white/10">
-                                                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                                <NavigationMenuContent className="z-50 border border-neutral-200 bg-white text-neutral-900 shadow-lg group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:bottom-auto group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:mb-0">
+                                                    <ul className="w-[320px] space-y-1 p-2">
                                                         {item.children.map((child, childIndex) => (
                                                             <li key={childIndex}>
                                                                 <NavigationMenuLink asChild>
                                                                     <Link
                                                                         href={child.href}
-                                                                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-[var(--color-beta)] focus:bg-white/10 focus:text-[var(--color-beta)]"
+                                                                        className="group flex flex-row items-start gap-3 rounded-lg px-3 py-2.5 text-neutral-900 transition-colors hover:bg-neutral-100 hover:text-[var(--color-alpha)]"
                                                                     >
-                                                                        <div className="text-sm font-medium leading-none">{child.title}</div>
+                                                                        {(() => {
+                                                                            const ChildIcon = getAideChildMeta(
+                                                                                typeof child.href === 'string' ? child.href : '',
+                                                                            ).icon;
+                                                                            return (
+                                                                                <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-neutral-700 transition group-hover:border-[var(--color-beta)]/40 group-hover:text-[var(--color-alpha)]">
+                                                                                    <ChildIcon className="h-4 w-4" />
+                                                                                </span>
+                                                                            );
+                                                                        })()}
+                                                                        <span className="min-w-0">
+                                                                            <span className="block text-sm font-semibold text-neutral-900">
+                                                                                {child.title}
+                                                                            </span>
+                                                                            <span className="mt-0.5 block text-xs text-neutral-500">
+                                                                                <TransText
+                                                                                    fr={
+                                                                                        getAideChildMeta(
+                                                                                            typeof child.href === 'string' ? child.href : '',
+                                                                                        ).description.fr
+                                                                                    }
+                                                                                    ar={
+                                                                                        getAideChildMeta(
+                                                                                            typeof child.href === 'string' ? child.href : '',
+                                                                                        ).description.ar
+                                                                                    }
+                                                                                    en={
+                                                                                        getAideChildMeta(
+                                                                                            typeof child.href === 'string' ? child.href : '',
+                                                                                        ).description.en
+                                                                                    }
+                                                                                />
+                                                                            </span>
+                                                                        </span>
                                                                     </Link>
                                                                 </NavigationMenuLink>
                                                             </li>
@@ -184,7 +251,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                     className={cn(
                                                         navigationMenuTriggerStyle(),
                                                         page.url === (typeof item.href === 'string' ? item.href : item.href.url) && activeItemStyles,
-                                                        'h-9 cursor-pointer px-3 hover:text-[var(--color-beta)] bg-transparent hover:bg-transparent focus:bg-transparent focus-visible:ring-0 focus-visible:outline-none text-[var(--color-light)]',
+                                                        'h-9 cursor-pointer bg-transparent px-3 text-[var(--color-light)] hover:bg-transparent hover:text-[var(--color-beta)] focus:bg-transparent focus:text-current focus-visible:ring-0 focus-visible:outline-none',
                                                     )}
                                                 >
                                                     {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
@@ -201,25 +268,25 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         </NavigationMenu>
                     </div>
 
+                    <div className={`${isArabic ? 'mr-auto' : 'ml-auto'} flex items-center gap-3`}>
+                        <LanguageSwitch />
+                    </div>
+
                     {/* Help Button */}
                     <div className={`${isArabic ? 'mr-2' : 'ml-2'} hidden lg:block`}>
-                        <Button
-                            asChild
-                            className="bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90"
-                        >
+                        <Button asChild className="bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
                             <Link href="/aide/formulaire">
                                 <TransText ar="أحتاج إلى المساعدة" fr="Je cherche de l'aide" en="I need help" />
                             </Link>
                         </Button>
                     </div>
-
-                    <div className={`${isArabic ? 'mr-auto' : 'ml-auto'} flex items-center gap-3`}>
-                        <LanguageSwitch />
-                    </div>
                 </div>
             </div>
             {breadcrumbs.length > 1 && (
-                <div className="flex w-full bg-[var(--color-alpha)] text-[var(--color-light)] dark:bg-[var(--color-alpha)] dark:text-white" dir={isArabic ? 'rtl' : 'ltr'}>
+                <div
+                    className="flex w-full bg-[var(--color-alpha)] text-[var(--color-light)] dark:bg-[var(--color-alpha)] dark:text-white"
+                    dir={isArabic ? 'rtl' : 'ltr'}
+                >
                     <div className="mx-auto flex h-12 w-full items-center justify-start px-4 md:max-w-7xl">
                         <Breadcrumbs breadcrumbs={breadcrumbs} />
                     </div>

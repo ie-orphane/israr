@@ -10,10 +10,12 @@ interface AppLayoutProps {
 }
 
 export default function AppLayout({ children, breadcrumbs, ...props }: AppLayoutProps) {
-    const { auth } = usePage<SharedData>().props;
+    const page = usePage<SharedData>();
+    const { auth } = page.props;
     const isAuthenticated = Boolean(auth && auth.user);
+    const usesSidebarLayout = ['/admin', '/settings'].some((prefix) => page.url.startsWith(prefix));
 
-    const LayoutComponent = isAuthenticated ? AppSidebarLayout : AppHeaderLayout;
+    const LayoutComponent = isAuthenticated && usesSidebarLayout ? AppSidebarLayout : AppHeaderLayout;
 
     return (
         <LayoutComponent breadcrumbs={breadcrumbs} {...props}>

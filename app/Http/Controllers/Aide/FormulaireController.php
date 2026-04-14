@@ -55,7 +55,16 @@ class FormulaireController extends Controller
         $this->sendNotificationEmail($aideRequest);
 
         return redirect()->route('aide.formulaire')
-            ->with('success', 'Votre demande a été envoyée avec succès. Nous vous contacterons bientôt.');
+            ->with([
+                'success' => 'Votre demande a ete enregistree avec succes. Nous vous contacterons bientot.',
+                'saved_request' => [
+                    'id' => $aideRequest->id,
+                    'status' => $aideRequest->status,
+                    'region' => $aideRequest->region,
+                    'contact_method' => $aideRequest->contact_method,
+                    'submitted_at' => $aideRequest->created_at?->toIso8601String(),
+                ],
+            ]);
     }
 
     /**

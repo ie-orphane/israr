@@ -1,17 +1,46 @@
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, FileText, Handshake, Inbox, LayoutGrid, FileArchive, FolderKanban } from 'lucide-react';
 import AppLogo from '../../../public/assets/images/logo_purple.png';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: "/",
+        href: '/admin/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: "Reponses d'aide",
+        href: '/admin/aide-requests',
+        icon: FileText,
+    },
+    {
+        title: 'Partenaires',
+        href: '/admin/partners',
+        icon: Handshake,
+    },
+    {
+        title: 'Publications',
+        href: '/admin/publications',
+        icon: BookOpen,
+    },
+    {
+        title: 'Programmes',
+        href: '/admin/programmes',
+        icon: FolderKanban,
+    },
+    {
+        title: 'Messages',
+        href: '/admin/messages',
+        icon: Inbox,
+    },
+    {
+        title: 'Documents a propos',
+        href: '/admin/about-documents',
+        icon: FileArchive,
     },
 ];
 

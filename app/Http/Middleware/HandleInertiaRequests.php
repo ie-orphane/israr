@@ -42,6 +42,11 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error' => fn () => $request->session()->get('error'),
+                'savedRequest' => fn () => $request->session()->get('saved_request'),
+            ],
             'auth' => [
                 'user' => $request->user(),
             ],

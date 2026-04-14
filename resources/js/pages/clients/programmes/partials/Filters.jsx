@@ -1,30 +1,28 @@
 import React from 'react';
+import TransText from '@components/TransText';
 
-const Filters = ({ onFilterChange, onFilters }) => {
+const Filters = ({ activeFilter, onFilterChange, onFilters }) => {
     return (
-        <>
-            <div className="bg-light shadow-sm sticky top-0 z-20 border-b border-light_gray">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
-                    <div className="flex flex-wrap gap-2 sm:gap-3 justify-center items-center">
-                        <span className="text-sm font-medium text-alpha mr-2 hidden sm:inline">
-                            Filtrer par :
-                        </span>
-                        {onFilters.map((f) => (
-                            <button
-                                key={f}
-                                onClick={() => onFilterChange(f)}
-                                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 ${onFilters === f
-                                    ? "bg-alpha text-light shadow-lg transform scale-105"
-                                    : "bg-light text-alpha border-2 border-light_gray hover:border-beta hover:text-beta hover:shadow-md"
-                                    }`}
-                            >
-                                {f}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+        <section className="sticky top-0 z-20 border-b border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
+            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2 px-6 py-4">
+                <span className="mr-2 hidden text-sm text-neutral-500 sm:inline">
+                    <TransText fr="Filtrer par" ar="تصفية حسب" />
+                </span>
+                {onFilters.map((f) => (
+                    <button
+                        key={f.key}
+                        onClick={() => onFilterChange(f.key)}
+                        className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
+                            activeFilter === f.key
+                                ? 'bg-[var(--color-alpha)] text-white shadow-md'
+                                : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                        }`}
+                    >
+                        <TransText fr={f.label.fr} ar={f.label.ar} />
+                    </button>
+                ))}
             </div>
-        </>
+        </section>
     );
 };
 

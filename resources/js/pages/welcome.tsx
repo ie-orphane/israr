@@ -1,22 +1,12 @@
+import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { Head, Link } from '@inertiajs/react';
 import TransText from '@components/TransText';
 import ImageCarousel from '@components/image-carousel';
-import { Button } from '@/components/ui/button';
-import { login, register } from '@/routes';
-import { MessageCircle, ShieldCheck, BarChart3, Megaphone, FileText, MapPin, CalendarDays, Mail } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
+import { BarChart3, CalendarDays, FileText, Mail, MapPin, Megaphone, MessageCircle, ShieldCheck } from 'lucide-react';
 
 export default function Welcome() {
     const carouselSlides = [
-        {
-            src: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&fit=crop&w=1600&q=80',
-            alt: 'Women collaborating in a meeting',
-            caption: {
-                fr: 'Accompagner les femmes et leurs proches avec une écoute dédiée.',
-                ar: 'مواكبة النساء والمحيطين بهن من خلال فضاء للإصغاء.',
-                en: 'Providing attentive support for women and their families.',
-            },
-        },
         {
             src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
             alt: 'Community meeting discussing rights',
@@ -231,7 +221,7 @@ export default function Welcome() {
                                     en="A platform committed to equality and empowerment"
                                 />
                             </h1>
-                            <p className="max-w-xl text-base text-neutral-700 dark:text-neutral-200 md:text-lg">
+                            <p className="max-w-xl text-base text-neutral-700 md:text-lg dark:text-neutral-200">
                                 <TransText
                                     fr="La Coalition ISRAR crée un espace numérique de confiance pour informer, protéger et accompagner les femmes face aux violences."
                                     ar="يخلق تحالف إصرار فضاءً رقمياً موثوقاً للإخبار والحماية ومواكبة النساء في مواجهة العنف."
@@ -241,21 +231,13 @@ export default function Welcome() {
 
                             <div className="flex flex-wrap gap-4">
                                 <Button asChild className="bg-[var(--color-beta)] text-white hover:bg-[var(--color-beta)]/90">
-                                    <Link href="/register" >
-                                        <TransText
-                                            fr="Rejoindre la plateforme"
-                                            ar="انضم إلى المنصة"
-                                            en="Join the platform"
-                                        />
+                                    <Link href="/register">
+                                        <TransText fr="Rejoindre la plateforme" ar="انضم إلى المنصة" en="Join the platform" />
                                     </Link>
                                 </Button>
                                 <Button asChild variant="secondary">
                                     <Link href="/login">
-                                        <TransText
-                                            fr="Se connecter"
-                                            ar="تسجيل الدخول"
-                                            en="Sign in"
-                                        />
+                                        <TransText fr="Se connecter" ar="تسجيل الدخول" en="Sign in" />
                                     </Link>
                                 </Button>
                             </div>
@@ -275,7 +257,7 @@ export default function Welcome() {
                                     en="Why thousands of women trust us"
                                 />
                             </h2>
-                            <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+                            <p className="mt-3 text-sm text-neutral-600 md:text-base dark:text-neutral-300">
                                 <TransText
                                     fr="Nous combinons expertise juridique, écoute psychosociale et gouvernance numérique pour garantir des parcours sécurisés."
                                     ar="نجمع بين الخبرة القانونية، الإصغاء النفساني الاجتماعي والحكامة الرقمية لضمان مسارات آمنة."
@@ -285,7 +267,10 @@ export default function Welcome() {
                         </div>
                         <div className="grid gap-6 md:grid-cols-3">
                             {highlightCards.map(({ icon: Icon, title, description }) => (
-                                <div key={title.en} className="rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-white/50 transition hover:-translate-y-1 hover:shadow-lg dark:bg-neutral-900/60 dark:ring-white/10">
+                                <div
+                                    key={title.en}
+                                    className="rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-white/50 transition hover:-translate-y-1 hover:shadow-lg dark:bg-neutral-900/60 dark:ring-white/10"
+                                >
                                     <div className="mb-4 inline-flex rounded-xl bg-[var(--color-beta)]/15 p-3 text-[var(--color-beta)]">
                                         <Icon className="h-6 w-6" />
                                     </div>
@@ -313,11 +298,7 @@ export default function Welcome() {
                         <div className="grid gap-8 md:grid-cols-2">
                             <article className="rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-white/50 backdrop-blur dark:bg-neutral-900/60 dark:ring-white/10">
                                 <h2 className="mb-4 text-xl font-semibold text-[var(--color-alpha)]">
-                                    <TransText
-                                        fr="Une plateforme de référence pour :"
-                                        ar="منصة مرجعية من أجل:"
-                                        en="A reference platform to:"
-                                    />
+                                    <TransText fr="Une plateforme de référence pour :" ar="منصة مرجعية من أجل:" en="A reference platform to:" />
                                 </h2>
                                 <ul className="space-y-3 text-neutral-800 dark:text-neutral-100">
                                     {missionItems.map((item) => (
@@ -333,11 +314,7 @@ export default function Welcome() {
 
                             <article className="rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-white/50 backdrop-blur dark:bg-neutral-900/60 dark:ring-white/10">
                                 <h2 className="mb-4 text-xl font-semibold text-[var(--color-alpha)]">
-                                    <TransText
-                                        fr="Constats de l’existant :"
-                                        ar="ملاحظات حول الوضع الحالي:"
-                                        en="Current platform challenges:"
-                                    />
+                                    <TransText fr="Constats de l’existant :" ar="ملاحظات حول الوضع الحالي:" en="Current platform challenges:" />
                                 </h2>
                                 <ul className="space-y-3 text-neutral-800 dark:text-neutral-100">
                                     {limitationItems.map((item) => (
@@ -363,7 +340,7 @@ export default function Welcome() {
                                         en="Programs and advocacy in action"
                                     />
                                 </h2>
-                                <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+                                <p className="mt-3 text-sm text-neutral-600 md:text-base dark:text-neutral-300">
                                     <TransText
                                         fr="Une présence nationale et maghrébine à travers des projets cofinancés, des campagnes de communication et un plaidoyer continu pour la réforme des lois."
                                         ar="حضور وطني ومغاربي عبر مشاريع ممولة، حملات تواصل ومرافعة مستمرة لإصلاح القوانين."
@@ -374,7 +351,10 @@ export default function Welcome() {
 
                             <div className="grid gap-6 md:grid-cols-3">
                                 {initiatives.map(({ icon: Icon, title, description, link }) => (
-                                    <div key={title.en} className="flex h-full flex-col rounded-2xl bg-[var(--color-alpha)]/10 p-6 shadow-sm ring-1 ring-[var(--color-alpha)]/20 transition hover:-translate-y-1 hover:shadow-lg dark:bg-[var(--color-alpha)]/20">
+                                    <div
+                                        key={title.en}
+                                        className="flex h-full flex-col rounded-2xl bg-[var(--color-alpha)]/10 p-6 shadow-sm ring-1 ring-[var(--color-alpha)]/20 transition hover:-translate-y-1 hover:shadow-lg dark:bg-[var(--color-alpha)]/20"
+                                    >
                                         <div className="mb-4 inline-flex rounded-xl bg-[var(--color-alpha)]/15 p-3 text-[var(--color-alpha)]">
                                             <Icon className="h-6 w-6" />
                                         </div>
@@ -404,11 +384,7 @@ export default function Welcome() {
                         <div className="grid gap-8 md:grid-cols-2">
                             <div className="rounded-2xl bg-white/90 p-6 shadow-sm ring-1 ring-white/50 dark:bg-neutral-900/60 dark:ring-white/10">
                                 <h2 className="mb-4 text-xl font-semibold text-[var(--color-alpha)]">
-                                    <TransText
-                                        fr="Opportunités & collaborations"
-                                        ar="فرص وتعاون"
-                                        en="Opportunities & collaborations"
-                                    />
+                                    <TransText fr="Opportunités & collaborations" ar="فرص وتعاون" en="Opportunities & collaborations" />
                                 </h2>
                                 <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-200">
                                     <TransText
@@ -419,13 +395,16 @@ export default function Welcome() {
                                 </p>
                                 <div className="space-y-4">
                                     {opportunities.map(({ icon: Icon, title, description, link }) => (
-                                        <div key={title.en} className="flex items-start gap-3 rounded-xl bg-[var(--color-beta)]/15 p-4 text-[var(--color-alpha)]">
+                                        <div
+                                            key={title.en}
+                                            className="flex items-start gap-3 rounded-xl bg-[var(--color-beta)]/15 p-4 text-[var(--color-alpha)]"
+                                        >
                                             <Icon className="mt-1 h-5 w-5" />
                                             <div>
                                                 <h3 className="text-sm font-semibold md:text-base">
                                                     <TransText fr={title.fr} ar={title.ar} en={title.en} />
                                                 </h3>
-                                                <p className="text-xs text-neutral-700 dark:text-neutral-100 md:text-sm">
+                                                <p className="text-xs text-neutral-700 md:text-sm dark:text-neutral-100">
                                                     <TransText fr={description.fr} ar={description.ar} en={description.en} />
                                                 </p>
                                                 {link && (
