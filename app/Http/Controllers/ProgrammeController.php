@@ -33,7 +33,7 @@ class ProgrammeController extends Controller
             ])
             ->map(fn (Programme $programme) => $this->formatProgramme($programme));
 
-        return Inertia::render('clients/programmes/index', [
+        return Inertia::render('programmes/index', [
             'programmes' => $programmes,
         ]);
     }
@@ -42,7 +42,7 @@ class ProgrammeController extends Controller
     {
         abort_unless($programme->is_published, 404);
 
-        return Inertia::render('clients/programmes/[id]', [
+        return Inertia::render('programmes/[id]', [
             'programme' => $this->formatProgramme($programme, true),
         ]);
     }

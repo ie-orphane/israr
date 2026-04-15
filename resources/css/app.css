@@ -162,12 +162,148 @@
     background-size: auto;
     background-position: top left;
     min-height: 100vh;
-    } */
-    
-    .zlij{
-        
-        background-image: url('/assets/images/backgorund.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+} */
+
+/* TipTap editor content styles */
+.tiptap-prose p {
+    margin: 0.5rem 0;
+}
+
+.tiptap-prose h1,
+.tiptap-prose h2,
+.tiptap-prose h3 {
+    color: var(--color-alpha);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.tiptap-prose h1 {
+    font-size: 1.5rem;
+}
+
+.tiptap-prose h2 {
+    font-size: 1.3rem;
+}
+
+.tiptap-prose h3 {
+    font-size: 1.15rem;
+}
+
+.tiptap-prose strong {
+    font-weight: 700;
+}
+
+.tiptap-prose em {
+    font-style: italic;
+}
+
+.tiptap-prose u {
+    text-decoration: underline;
+}
+
+.tiptap-prose ul,
+.tiptap-prose ol {
+    margin: 0.5rem 0;
+    padding-inline-start: 1.5rem;
+}
+
+.tiptap-prose ul {
+    list-style: disc;
+}
+
+.tiptap-prose ol {
+    list-style: decimal;
+}
+
+.tiptap-prose blockquote {
+    border-inline-start: 3px solid var(--color-beta);
+    margin: 0.75rem 0;
+    padding-inline-start: 0.85rem;
+    color: color-mix(in srgb, var(--color-dark) 70%, white 30%);
+}
+
+.tiptap-prose a {
+    color: var(--color-beta);
+    text-decoration: underline;
+}
+
+.tiptap-prose p.is-editor-empty:first-child::before {
+    color: var(--color-muted-foreground);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Public blog content rendering styles */
+.blog-content {
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.blog-content p {
+    margin: 0.6rem 0;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+    color: var(--color-alpha);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1rem 0 0.55rem;
+}
+
+.blog-content h1 {
+    font-size: 2rem;
+}
+
+.blog-content h2 {
+    font-size: 1.6rem;
+}
+
+.blog-content h3 {
+    font-size: 1.3rem;
+}
+
+.blog-content ul,
+.blog-content ol {
+    margin: 0.7rem 0;
+    padding-inline-start: 1.6rem;
+}
+
+.blog-content ul {
+    list-style: disc;
+}
+
+.blog-content ol {
+    list-style: decimal;
+}
+
+.blog-content li {
+    margin: 0.25rem 0;
+}
+
+.blog-content blockquote {
+    border-inline-start: 4px solid var(--color-beta);
+    margin: 1rem 0;
+    padding: 0.4rem 0 0.4rem 1rem;
+    color: color-mix(in srgb, var(--color-dark) 72%, white 28%);
+    background: color-mix(in srgb, var(--color-beta) 10%, white 90%);
+    border-radius: 0.5rem;
+}
+
+.blog-content a {
+    color: var(--color-beta);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.blog-content strong {
+    font-weight: 700;
+}
+
+.blog-content em {
+    font-style: italic;
 }
