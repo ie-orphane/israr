@@ -80,25 +80,33 @@ export default function Contact() {
     return (
         <AppLayout>
             <Head title="Contact" />
-            <div className="bg-white/85 backdrop-blur-sm dark:bg-neutral-950/80">
-                {/* Hero */}
-                <section className="bg-[var(--color-alpha)] py-16 text-white md:py-24">
-                    <div className="mx-auto max-w-6xl px-6 text-center">
-                        <h1 className="text-3xl font-bold md:text-5xl">
-                            <TransText fr="Contactez-nous" ar="اتصلوا بنا" en="Contact us" />
-                        </h1>
-                        <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-                            <TransText
-                                fr="Nous sommes à votre écoute. N'hésitez pas à nous contacter pour toute question, partenariat ou collaboration."
-                                ar="نحن في خدمتكم. لا تترددوا في الاتصال بنا لأي سؤال أو شراكة أو تعاون."
-                                en="We are here to listen. Don't hesitate to reach out for any question, partnership, or collaboration."
-                            />
-                        </p>
+            <div className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f7f4fb_45%,#ffffff_100%)]">
+                <section className="mx-auto max-w-6xl px-4 pb-4 pt-8 sm:px-6 lg:px-8 lg:pt-12">
+                    <div className="overflow-hidden rounded-3xl border border-[var(--color-alpha)]/15 bg-white shadow-sm">
+                        <div className="relative p-7 sm:p-10">
+                            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[var(--color-beta)]/15 blur-2xl" />
+                            <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-[var(--color-alpha)]/15 blur-2xl" />
+                            <div className="relative">
+                                <span className="inline-flex items-center rounded-full border border-[var(--color-alpha)]/20 bg-[var(--color-alpha)]/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-alpha)]">
+                                    <TransText fr="Contact ISRAR" ar="تواصل مع إصرار" en="Contact ISRAR" />
+                                </span>
+                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-[var(--color-alpha)] md:text-4xl">
+                                    <TransText fr="Contactez-nous" ar="اتصلوا بنا" en="Contact us" />
+                                </h1>
+                                <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-600 md:text-base">
+                                    <TransText
+                                        fr="Nous sommes à votre écoute. Contactez-nous pour toute question, partenariat ou collaboration."
+                                        ar="نحن في خدمتكم. تواصلوا معنا لأي سؤال أو شراكة أو تعاون."
+                                        en="We are here to listen. Reach out for any question, partnership, or collaboration."
+                                    />
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {/* Email Contacts */}
-                <section id="partenariats" className="mx-auto max-w-6xl px-6 py-16">
+                <section id="partenariats" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
                     <h2 className="mb-8 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                         <TransText fr="Écrivez-nous" ar="راسلونا" en="Write to us" />
                     </h2>
@@ -128,7 +136,7 @@ export default function Contact() {
 
                 {/* Map + Form */}
                 <section className="bg-neutral-50 py-16 dark:bg-neutral-900/40">
-                    <div className="mx-auto max-w-6xl px-6">
+                    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                         <div className="grid gap-8 lg:grid-cols-2">
                             {/* Map */}
                             <div>
@@ -237,7 +245,7 @@ export default function Contact() {
                 </section>
 
                 {/* Social Media */}
-                <section className="mx-auto max-w-6xl px-6 py-16">
+                <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
                     <h2 className="mb-8 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                         <TransText fr="Suivez-nous" ar="تابعونا" en="Follow us" />
                     </h2>

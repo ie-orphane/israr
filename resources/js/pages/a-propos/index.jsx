@@ -159,25 +159,33 @@ export default function APropos({ documents = [] }) {
     return (
         <AppLayout>
             <Head title="À propos" />
-            <div className="bg-white/85 backdrop-blur-sm dark:bg-neutral-950/80">
-                {/* Hero */}
-                <section className="bg-[var(--color-alpha)] py-16 text-white md:py-24">
-                    <div className="mx-auto max-w-6xl px-6 text-center">
-                        <h1 className="text-3xl font-bold md:text-5xl">
-                            <TransText fr="À propos de la Coalition ISRAR" ar="حول تحالف إصرار" en="About the ISRAR Coalition" />
-                        </h1>
-                        <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-                            <TransText
-                                fr="Réseau national de 19 associations, la Coalition ISRAR agit dans 8 régions du Maroc pour l'élimination des violences fondées sur le genre."
-                                ar="شبكة وطنية تضم 19 جمعية، يعمل تحالف إصرار في 8 جهات بالمغرب من أجل القضاء على العنف المبني على النوع الاجتماعي."
-                                en="A national network of 19 associations, the ISRAR Coalition operates across 8 regions of Morocco to eliminate gender-based violence."
-                            />
-                        </p>
+            <div className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f7f4fb_45%,#ffffff_100%)]">
+                <section className="mx-auto max-w-6xl px-4 pb-4 pt-8 sm:px-6 lg:px-8 lg:pt-12">
+                    <div className="overflow-hidden rounded-3xl border border-[var(--color-alpha)]/15 bg-white shadow-sm">
+                        <div className="relative p-7 sm:p-10">
+                            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[var(--color-beta)]/15 blur-2xl" />
+                            <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-[var(--color-alpha)]/15 blur-2xl" />
+                            <div className="relative">
+                                <span className="inline-flex items-center rounded-full border border-[var(--color-alpha)]/20 bg-[var(--color-alpha)]/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-alpha)]">
+                                    <TransText fr="Coalition ISRAR" ar="تحالف إصرار" en="ISRAR Coalition" />
+                                </span>
+                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-[var(--color-alpha)] md:text-4xl">
+                                    <TransText fr="À propos de la Coalition ISRAR" ar="حول تحالف إصرار" en="About the ISRAR Coalition" />
+                                </h1>
+                                <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-600 md:text-base">
+                                    <TransText
+                                        fr="Réseau national de 19 associations, la Coalition ISRAR agit dans 8 régions du Maroc pour l'élimination des violences fondées sur le genre."
+                                        ar="شبكة وطنية تضم 19 جمعية، يعمل تحالف إصرار في 8 جهات بالمغرب من أجل القضاء على العنف المبني على النوع الاجتماعي."
+                                        en="A national network of 19 associations, the ISRAR Coalition operates across 8 regions of Morocco to eliminate gender-based violence."
+                                    />
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {/* Timeline */}
-                <section className="mx-auto max-w-4xl px-6 py-16">
+                <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
                     <h2 className="mb-12 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                         <TransText fr="Notre parcours" ar="مسارنا" en="Our journey" />
                     </h2>
@@ -205,7 +213,7 @@ export default function APropos({ documents = [] }) {
 
                 {/* Achievements */}
                 <section className="bg-neutral-50 py-16 dark:bg-neutral-900/40">
-                    <div className="mx-auto max-w-6xl px-6">
+                    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                         <h2 className="mb-10 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                             <TransText fr="Réalisations majeures" ar="الإنجازات الرئيسية" en="Major achievements" />
                         </h2>
@@ -228,7 +236,7 @@ export default function APropos({ documents = [] }) {
                 </section>
 
                 {/* Governance */}
-                <section className="mx-auto max-w-6xl px-6 py-16">
+                <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
                     <h2 className="mb-10 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                         <TransText fr="Gouvernance" ar="الحكامة" en="Governance" />
                     </h2>
@@ -251,7 +259,7 @@ export default function APropos({ documents = [] }) {
 
                 {documents.length > 0 && (
                     <section className="border-t border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-700 dark:bg-neutral-900/40">
-                        <div className="mx-auto max-w-4xl px-6">
+                        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                             <h2 className="mb-10 text-center text-2xl font-bold text-[var(--color-alpha)] md:text-3xl">
                                 <TransText fr="Documents téléchargeables" ar="وثائق قابلة للتحميل" en="Downloadable documents" />
                             </h2>

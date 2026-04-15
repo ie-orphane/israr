@@ -62,26 +62,34 @@ export default function Publications({ publications = [] }) {
     return (
         <AppLayout>
             <Head title="Publications & Ressources" />
-            <div className="bg-white/85 backdrop-blur-sm dark:bg-neutral-950/80">
-                {/* Hero */}
-                <section className="bg-[var(--color-alpha)] py-16 text-white md:py-24">
-                    <div className="mx-auto max-w-6xl px-6 text-center">
-                        <h1 className="text-3xl font-bold md:text-5xl">
-                            <TransText fr="Publications & Ressources" ar="المنشورات والموارد" en="Publications & Resources" />
-                        </h1>
-                        <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-                            <TransText
-                                fr="Consultez et téléchargez nos rapports, notes de plaidoyer, communiqués et guides pratiques."
-                                ar="اطلعوا على تقاريرنا ومذكرات المرافعة والبيانات الصحفية والدلائل العملية وحمّلوها."
-                                en="Browse and download our reports, advocacy briefs, press releases, and practical guides."
-                            />
-                        </p>
+            <div className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f7f4fb_45%,#ffffff_100%)]">
+                <section className="mx-auto max-w-6xl px-4 pb-4 pt-8 sm:px-6 lg:px-8 lg:pt-12">
+                    <div className="overflow-hidden rounded-3xl border border-[var(--color-alpha)]/15 bg-white shadow-sm">
+                        <div className="relative p-7 sm:p-10">
+                            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[var(--color-beta)]/15 blur-2xl" />
+                            <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-[var(--color-alpha)]/15 blur-2xl" />
+                            <div className="relative">
+                                <span className="inline-flex items-center rounded-full border border-[var(--color-alpha)]/20 bg-[var(--color-alpha)]/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-alpha)]">
+                                    <TransText fr="Bibliothèque ISRAR" ar="مكتبة إصرار" en="ISRAR Library" />
+                                </span>
+                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-[var(--color-alpha)] md:text-4xl">
+                                    <TransText fr="Publications & Ressources" ar="المنشورات والموارد" en="Publications & Resources" />
+                                </h1>
+                                <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-600 md:text-base">
+                                    <TransText
+                                        fr="Consultez et téléchargez nos rapports, notes de plaidoyer, communiqués et guides pratiques."
+                                        ar="اطلعوا على تقاريرنا ومذكرات المرافعة والبيانات الصحفية والدلائل العملية وحمّلوها."
+                                        en="Browse and download our reports, advocacy briefs, press releases, and practical guides."
+                                    />
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {/* Filters */}
                 <section className="sticky top-0 z-20 border-b border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
-                    <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2 px-6 py-4">
+                    <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2 px-4 py-4 sm:px-6 lg:px-8">
                         <Filter className="mr-2 hidden h-4 w-4 text-neutral-500 sm:block" />
                         {categories.map(({ key, label }) => (
                             <button
@@ -100,7 +108,7 @@ export default function Publications({ publications = [] }) {
                 </section>
 
                 {/* Publications Grid */}
-                <section className="mx-auto max-w-6xl px-6 py-12">
+                <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
                     <p className="mb-6 text-center text-sm text-neutral-500">
                         <TransText
                             fr={`${filtered.length} publication${filtered.length > 1 ? 's' : ''}`}

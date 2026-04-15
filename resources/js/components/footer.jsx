@@ -92,6 +92,9 @@ export default function Footer() {
                             <Link href="/publications" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100">
                                 <TransText ar="المنشورات" fr="Publications" en="Publications" />
                             </Link>
+                            <Link href="/blogs" className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100">
+                                <TransText ar="المدونة" fr="Blog" en="Blog" />
+                            </Link>
                             <Link
                                 href="/aide/base-juridique"
                                 className="opacity-80 transition-colors hover:text-[var(--color-beta)] hover:opacity-100"

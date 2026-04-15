@@ -53,32 +53,37 @@ export default function Formulaire() {
     return (
         <AppLayout>
             <Head title="Formulaire d'aide" />
-            <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-12 xl:max-w-7xl">
-                <section className="relative overflow-hidden rounded-2xl border border-[var(--color-alpha)]/20 bg-gradient-to-br from-[var(--color-alpha)] via-[var(--color-alpha)]/90 to-[var(--color-beta)] px-6 py-8 text-white md:px-8">
-                    <div className="relative z-10 max-w-3xl space-y-3">
-                        <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
-                            <ShieldCheck className="h-3.5 w-3.5" />
-                            <TransText fr="Espace securise" ar="مساحة آمنة" en="Secure space" />
-                        </p>
-                        <h1 className="text-2xl font-bold leading-tight md:text-3xl">
-                            <TransText
-                                fr="Demander une aide juridique en toute confidentialite"
-                                ar="اطلبي المساعدة القانونية بسرية تامة"
-                                en="Request legal support with full confidentiality"
-                            />
-                        </h1>
-                        <p className="max-w-2xl text-sm text-white/90 md:text-base">
-                            <TransText
-                                fr="Ce formulaire nous permet de comprendre votre situation et de vous orienter rapidement vers l'accompagnement adapte."
-                                ar="يساعدنا هذا النموذج على فهم وضعيتك وتوجيهك بسرعة نحو المواكبة المناسبة."
-                                en="This form helps us understand your situation and connect you quickly with the right support."
-                            />
-                        </p>
+            <div className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f7f4fb_45%,#ffffff_100%)]">
+                <section className="mx-auto max-w-6xl px-4 pb-4 pt-8 sm:px-6 lg:px-8 lg:pt-12">
+                    <div className="overflow-hidden rounded-3xl border border-[var(--color-alpha)]/15 bg-white shadow-sm">
+                        <div className="relative p-7 sm:p-10">
+                            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[var(--color-beta)]/15 blur-2xl" />
+                            <div className="absolute bottom-0 left-0 h-20 w-20 rounded-full bg-[var(--color-alpha)]/15 blur-2xl" />
+                            <div className="relative max-w-4xl">
+                                <p className="inline-flex items-center gap-2 rounded-full border border-[var(--color-alpha)]/20 bg-[var(--color-alpha)]/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-alpha)]">
+                                    <ShieldCheck className="h-3.5 w-3.5" />
+                                    <TransText fr="Espace securise" ar="مساحة آمنة" en="Secure space" />
+                                </p>
+                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-[var(--color-alpha)] md:text-4xl">
+                                    <TransText
+                                        fr="Demander une aide juridique en toute confidentialite"
+                                        ar="اطلبي المساعدة القانونية بسرية تامة"
+                                        en="Request legal support with full confidentiality"
+                                    />
+                                </h1>
+                                <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-600 md:text-base">
+                                    <TransText
+                                        fr="Ce formulaire nous permet de comprendre votre situation et de vous orienter rapidement vers l'accompagnement adapte."
+                                        ar="يساعدنا هذا النموذج على فهم وضعيتك وتوجيهك بسرعة نحو المواكبة المناسبة."
+                                        en="This form helps us understand your situation and connect you quickly with the right support."
+                                    />
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-white/15 blur-2xl" />
-                    <div className="pointer-events-none absolute -bottom-20 left-8 h-40 w-40 rounded-full bg-black/10 blur-3xl" />
                 </section>
 
+                <section className="mx-auto max-w-6xl px-4 pb-12 sm:px-6 lg:px-8">
                 <Card className="border-2 border-[var(--color-alpha)]/15 shadow-sm">
                     <CardHeader className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -334,6 +339,7 @@ export default function Formulaire() {
                         </Form>
                     </CardContent>
                 </Card>
+                </section>
             </div>
         </AppLayout>
     );

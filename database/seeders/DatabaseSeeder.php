@@ -14,13 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
-            [
-                'name' => env('ADMIN_NAME', 'Admin User'),
-                'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
-                'email' => env('ADMIN_EMAIL', 'test@example.com'),
-                'email_verified_at' => now(),
-            ]
-        );
+        // User::firstOrCreate(
+        //     [
+        //         'name' => env('ADMIN_NAME', 'Admin User'),
+        //         'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
+        //         'email' => env('ADMIN_EMAIL', 'test@example.com'),
+        //         'email_verified_at' => now(),
+        //     ]
+        // );
+
+
+        // call blog seeder
+        $this->call([
+            BlogSeeder::class,
+        ]);
     }
 }

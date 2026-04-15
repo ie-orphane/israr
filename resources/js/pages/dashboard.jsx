@@ -27,7 +27,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle>Demandes d'aide</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Les reponses du formulaire d'aide sont maintenant disponibles sur une page dediee.
                             </p>
@@ -41,7 +41,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle>Gestion des partenaires</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Ajoutez et visualisez les partenaires depuis une page dediee.
                             </p>
@@ -55,7 +55,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle>Gestion des publications</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Ajoutez des documents qui seront affiches automatiquement sur la page publique /publications.
                             </p>
@@ -69,7 +69,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle>Gestion des programmes</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Ajoutez, modifiez et publiez les programmes affiches sur la page publique /programmes.
                             </p>
@@ -78,12 +78,25 @@ export default function Dashboard() {
                             </Button>
                         </CardContent>
                     </Card>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Gestion des blogs</CardTitle>
+                        </CardHeader>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                Publiez et organisez les articles bilingues affichés sur la page /blogs.
+                            </p>
+                            <Button asChild className="bg-[var(--color-alpha)] text-white hover:bg-[var(--color-alpha)]/90">
+                                <Link href="/admin/blogs">Ouvrir la gestion des blogs</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
 
                     <Card>
                         <CardHeader>
                             <CardTitle>Messages de contact</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Consultez tous les messages recus depuis le formulaire de contact public.
                             </p>
@@ -97,7 +110,7 @@ export default function Dashboard() {
                         <CardHeader>
                             <CardTitle>Documents telechargeables</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className='justify-between flex flex-col items-start h-full'>
                             <p className="mb-4 text-sm text-muted-foreground">
                                 Gere les documents affiches dans la section Documents telechargeables de la page A propos.
                             </p>

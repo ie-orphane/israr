@@ -43,6 +43,11 @@ const mainNavItems: NavItem[] = [
         icon: null,
     },
     {
+        title: <TransText ar="المدونة" fr="Blog" en="Blog" />,
+        href: '/blogs',
+        icon: null,
+    },
+    {
         title: <TransText ar="المساعدة القانونية" fr="Aide juridique" en="Legal aid" />,
         href: '/aide',
         icon: null,
